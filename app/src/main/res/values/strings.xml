@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Little Daffy</string>
+    <string name="facebook_app_id">445240413854401</string>
+    <string name="fb_login_protocol_scheme">fb445240413854401</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+</resources>
