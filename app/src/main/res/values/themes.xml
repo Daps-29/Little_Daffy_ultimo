@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.LittleDaffy" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/plomo</item>
-        <item name="colorPrimaryVariant">@color/plomo</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/fondo</item>
+        <item name="colorPrimaryVariant">@color/fondo</item>
+        <item name="colorOnPrimary">@color/fondo</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/fondo</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -26,5 +26,10 @@
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/fondo</item>
+        <item name="android:textColorSecondary">@color/fondo</item>
+        <item name="actionMenuTextColor">@color/fondo</item>
     </style>
 </resources>

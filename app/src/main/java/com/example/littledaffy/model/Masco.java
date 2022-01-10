@@ -1,4 +1,4 @@
-package com.example.littledaffy;
+package com.example.littledaffy.model;
 
 public class Masco {
     String nombre;

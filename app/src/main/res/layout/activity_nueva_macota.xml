@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NuevaMacotaActivity">
+
+    <EditText
+        android:id="@+id/nombremasco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Nombre"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/descripcionmascota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Descipción de la mascota"
+        android:textSize="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/nombremasco"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/ubicacionmascota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Ubicación de la mascota"
+        android:textSize="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/descripcionmascota"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/fecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Fecha"
+        android:textSize="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/ubicacionmascota"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/estado"
+        android:layout_width="143dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:hint="Estado mascota"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fecha" />
+
+
+    <Spinner
+        android:id="@+id/etsadospinner"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintStart_toEndOf="@+id/estado"
+        app:layout_constraintTop_toBottomOf="@+id/fecha" />
+
+    <TextView
+        android:id="@+id/categoria"
+        android:layout_width="143dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:hint="Categoria:"
+        android:textSize="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estado" />
+
+    <Spinner
+        android:id="@+id/categoriaspinner"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="136dp"
+        app:layout_constraintStart_toEndOf="@+id/categoria"
+        app:layout_constraintTop_toBottomOf="@+id/fecha" />
+
+    <EditText
+        android:id="@+id/edadmascota"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:hint="Edad"
+        android:textSize="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoria" />
+
+    <Spinner
+        android:id="@+id/tiempo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="204dp"
+        app:layout_constraintStart_toEndOf="@+id/edadmascota"
+        app:layout_constraintTop_toBottomOf="@+id/fecha" />
+
+    <TextView
+        android:id="@+id/sexo"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:hint="Sexo"
+        android:textSize="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edadmascota" />
+
+    <Spinner
+        android:id="@+id/sexomascota"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="276dp"
+        app:layout_constraintStart_toEndOf="@+id/sexo"
+        app:layout_constraintTop_toBottomOf="@+id/fecha" />
+
+    <EditText
+        android:id="@+id/raza"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:hint="Raza"
+        android:textSize="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/sexo"
+        tools:layout_editor_absoluteX="-46dp" />
+
+    <EditText
+        android:id="@+id/vacuna"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Vacunas"
+        android:textSize="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/raza"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/guardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:hint="Guardar"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vacuna" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

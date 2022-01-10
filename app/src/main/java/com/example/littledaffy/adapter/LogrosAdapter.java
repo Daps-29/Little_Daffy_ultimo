@@ -29,7 +29,7 @@ public class LogrosAdapter extends RecyclerView.Adapter<LogrosAdapter.MyViewHold
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nombre, edad;
+        TextView nombre, edad, estado_logro;
         ImageView foto;
         Context context;
 
@@ -39,6 +39,7 @@ public class LogrosAdapter extends RecyclerView.Adapter<LogrosAdapter.MyViewHold
             nombre = (TextView) v.findViewById(R.id.nombreMascota);
             edad = (TextView) v.findViewById(R.id.edad);
             foto = (ImageView) v.findViewById(R.id.organizacionImage);
+            estado_logro = (TextView) v.findViewById(R.id.estado_logro);
             context = v.getContext();
         }
     }
@@ -51,23 +52,24 @@ public class LogrosAdapter extends RecyclerView.Adapter<LogrosAdapter.MyViewHold
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LogrosAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // create a new view
 
         CardView v = (CardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_encontrados, parent, false);
 
-        MyViewHolder vh = new MyViewHolder(v);
+        LogrosAdapter.MyViewHolder vh = new LogrosAdapter.MyViewHolder(v);
         return vh;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LogrosAdapter.MyViewHolder holder, int position) {
         final MascotaDto currentItem = data.get(position);
 
         holder.nombre.setText(currentItem.getNombre());
         holder.edad.setText(String.valueOf(currentItem.getEdad()));
+        holder.estado_logro.setText(String.valueOf(currentItem.getEstadoperdida()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

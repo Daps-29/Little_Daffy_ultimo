@@ -1,10 +1,6 @@
 package com.example.littledaffy;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,11 +10,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 
 import com.example.littledaffy.databinding.ActivityMapsBinding;
 import com.example.littledaffy.model.DireccionDto;
@@ -27,13 +23,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,6 +51,7 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+    FloatingActionButton verGoogleMapsOrganizacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +70,8 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        verGoogleMapsOrganizacion = (FloatingActionButton) findViewById(R.id.verGoogleMapsOrganizacion);
 
 
         //OBTENER DATOS DE LA ANTERIOR ACTIVITY
@@ -179,10 +175,32 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             if (dataSnapshot.exists()) {
                                                 mMap = googleMap;
+                                                mMap.getUiSettings().setMapToolbarEnabled(false);
+                                                mMap.getUiSettings();
                                                 OrganizacionDto organizacionDto = dataSnapshot.getValue(OrganizacionDto.class);
+                                                nombreOrganizacion.setText(organizacionDto.getNombre());
                                                 nombremarcador = organizacionDto.getNombre();
                                                 //Agrega marcador de la ubicacion actual en el mapa
                                                 if(latitude != null && longitude != null){
+                                                    verGoogleMapsOrganizacion.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            if(!latitude.equals("") || !longitude.equals("")){
+                                                                try {
+                                                                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                                                            Uri.parse("geo:0,0?q="+ latitude +","+ longitude +" (Organizacion: " + nombreOrganizacion.getText().toString() + ")"));
+                                                                    startActivity(intent);
+                                                                }catch (Exception e){
+                                                                    Toast.makeText(getApplicationContext(), "Contacta con la organizacion para saber su ubicacion exacta", Toast.LENGTH_LONG).show();
+                                                                }
+
+                                                            }else{
+                                                                Toast.makeText(getApplicationContext(),"La organizacion no especificó su dirección exacta.", Toast.LENGTH_LONG).show();
+                                                            }
+                                                        }
+                                                    });
+
+
                                                     LatLng ubicacionActual = new LatLng(latitude, longitude);
                                                     mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource
                                                             (R.drawable.ic_marcador)).anchor(0.0f , 1.0f).position(ubicacionActual).title(nombremarcador));

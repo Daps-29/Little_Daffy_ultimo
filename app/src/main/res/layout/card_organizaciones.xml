@@ -18,7 +18,6 @@
         android:layout_height="wrap_content">
 
 
-
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/organizacionImage"
             android:layout_width="match_parent"

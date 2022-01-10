@@ -1,29 +1,27 @@
-package com.example.littledaffy;
+package com.example.littledaffy.fragments;
 
-import android.content.DialogInterface;
-import android.graphics.PorterDuff;
-import android.location.Location;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.littledaffy.R;
 import com.example.littledaffy.adapter.OrganizacionAdapter;
 import com.example.littledaffy.model.OrganizacionDto;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class OrganizacionActivity extends AppCompatActivity {
+public class OrganizacionesFragment extends Fragment {
 
     RecyclerView rv_subcategoria;
     DatabaseReference database;
@@ -32,29 +30,21 @@ public class OrganizacionActivity extends AppCompatActivity {
 
     RecyclerView.LayoutManager layoutManager;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_organizaciones);
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.icon_back);
-        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.verde), PorterDuff.Mode.SRC_ATOP);
-        setSupportActionBar(toolbar);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_organizaciones, container, false);
 
         //Para la lista organizaciones
-        rv_subcategoria = (RecyclerView) findViewById(R.id.rv_organizaciones);
+        rv_subcategoria = (RecyclerView) root.findViewById(R.id.rv_organizaciones);
         rv_subcategoria.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(getContext());
         rv_subcategoria.setLayoutManager(layoutManager);
 
         //ACCIONES PARA LA LISTA
         database = FirebaseDatabase.getInstance().getReference("organizaciones");
 
         organizacionDtoList = new ArrayList<>();
-        organizacionAdapter = new OrganizacionAdapter(this,organizacionDtoList);
+        organizacionAdapter = new OrganizacionAdapter(getContext(),organizacionDtoList);
         rv_subcategoria.setAdapter(organizacionAdapter);
 
 
@@ -64,7 +54,6 @@ public class OrganizacionActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 organizacionDtoList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
                     OrganizacionDto organizacionDto = dataSnapshot.getValue(OrganizacionDto.class);
                     int estado = organizacionDto.getEstado_organizacion();
                     if (estado == 1) {
@@ -84,13 +73,7 @@ public class OrganizacionActivity extends AppCompatActivity {
             }
         });
 
-
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+        return root;
     }
 
 }

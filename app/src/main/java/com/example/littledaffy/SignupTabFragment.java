@@ -13,15 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.littledaffy.model.RegisterHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SignupTabFragment extends Fragment {
     private EditText nombres;
@@ -106,7 +104,7 @@ public class SignupTabFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
                             if (task2.isSuccessful()){
-                                startActivity(new Intent(SignupTabFragment.this.getContext(),OrganizacionActivity.class));
+                                startActivity(new Intent(SignupTabFragment.this.getContext(),MainActivity.class));
                                
                             }
                             else {

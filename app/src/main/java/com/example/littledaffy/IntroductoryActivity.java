@@ -1,12 +1,5 @@
 package com.example.littledaffy;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +7,13 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -40,12 +40,12 @@ public class IntroductoryActivity extends AppCompatActivity {
         splashImg = findViewById(R.id.img);
         lottieAnimationView = findViewById(R.id.splash);
 
-        viewPager = findViewById(R.id.pager);
+
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
+        //viewPager.setAdapter(pagerAdapter);
 
         anim = AnimationUtils.loadAnimation(this, R.anim.o_b_anim);
-        viewPager.startAnimation(anim);
+//        viewPager.startAnimation(anim);
 
         splashImg.animate().translationY(-4000).setDuration(4000).setStartDelay(6000);
         logo.animate().translationY(-450).setDuration(4000).setStartDelay(6000);
@@ -83,14 +83,9 @@ public class IntroductoryActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                OnBoardingFragment1 tab1 = new OnBoardingFragment1();
+                LoginTabFragment tab1 = new LoginTabFragment();
                 return tab1;
-                case 1:
-                    OnBoardingFragment2 tab2 = new OnBoardingFragment2();
-                    return tab2;
-                case 2:
-                    OnBoardingFragment3 tab3 = new OnBoardingFragment3();
-                    return tab3;
+
             }
             return null;
         }

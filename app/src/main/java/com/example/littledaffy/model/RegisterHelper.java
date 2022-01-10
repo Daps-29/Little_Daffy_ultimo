@@ -1,4 +1,4 @@
-package com.example.littledaffy;
+package com.example.littledaffy.model;
 
 public class RegisterHelper {
     String nombres, apellidos, correo, contraseña,id,direccion,foto,telefono,sexo;

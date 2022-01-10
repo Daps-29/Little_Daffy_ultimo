@@ -1,4 +1,4 @@
-/*dependencyResolutionManagement {
+dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
@@ -6,6 +6,6 @@
         jcenter()
         maven { url "https://maven.xyz.com" }
     }
-}*/
+}
 rootProject.name = "Little Daffy"
 include ':app'

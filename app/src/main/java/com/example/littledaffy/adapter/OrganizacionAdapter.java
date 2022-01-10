@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.littledaffy.OrganizacionActivity;
 import com.example.littledaffy.R;
 import com.example.littledaffy.VerOrganizacionesActivity;
 import com.example.littledaffy.model.OrganizacionDto;
@@ -45,7 +44,7 @@ public class OrganizacionAdapter extends RecyclerView.Adapter<OrganizacionAdapte
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public OrganizacionAdapter(OrganizacionActivity organizacionesActivity, ArrayList<OrganizacionDto> myDataset) {
+    public OrganizacionAdapter(Context organizacionesActivity, ArrayList<OrganizacionDto> myDataset) {
         data = myDataset;
     }
 
