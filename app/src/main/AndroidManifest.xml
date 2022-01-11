@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LittleDaffy">
         <activity
+            android:name=".MascotaDetalleActivity"
+            android:exported="false" />
+        <activity
             android:name=".NuevaMacotaActivity"
             android:exported="false" />
         <activity

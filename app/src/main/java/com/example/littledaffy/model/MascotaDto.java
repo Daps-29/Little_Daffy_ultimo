@@ -4,17 +4,18 @@ public class MascotaDto {
 
     /* COMIENZO BASE DE DATOS */
 
-    private int edad, estado, estadoperdida, verificacion;
-    private String categorias, fecha, raza, sexo;
+    private int edad, verificacion;
+    private String categorias, fecha, raza, sexo, estado,estadoperdida, tiempo;
     private String foto1, foto2, foto3;
     private String ubicacion, vacuna, user;
     private String nombre, descripcion, id_mascota;
 
     //CONSTRUCTOR
-    public MascotaDto(String id_mascota, int edad, int estado, int estadoperdida, int verificacion, String categorias, String fecha, String raza, String sexo, String foto1, String foto2, String foto3, String ubicacion, String vacuna, String user, String nombre, String descripcion) {
+    public MascotaDto(String id_mascota, int edad, String estado, String estadoperdida, String tiempo, int verificacion, String categorias, String fecha, String raza, String sexo, String foto1, String foto2, String foto3, String ubicacion, String vacuna, String user, String nombre, String descripcion) {
         this.edad = edad;
         this.estado = estado;
         this.estadoperdida = estadoperdida;
+        this.tiempo = tiempo;
         this.verificacion = verificacion;
         this.categorias = categorias;
         this.fecha = fecha;
@@ -47,20 +48,28 @@ public class MascotaDto {
         this.edad = edad;
     }
 
-    public int getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public int getEstadoperdida() {
+    public String getEstadoperdida() {
         return estadoperdida;
     }
 
-    public void setEstadoperdida(int estadoperdida) {
+    public void setEstadoperdida(String estadoperdida) {
         this.estadoperdida = estadoperdida;
+    }
+
+    public String getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
     }
 
     public int getVerificacion() {

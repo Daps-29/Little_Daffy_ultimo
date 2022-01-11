@@ -1,7 +1,9 @@
 package com.example.littledaffy.model;
 
 public class Mascota {
-    String mascotaid,nombre,descripcion,ubicacion,fecha,estado,categoria,edad,tiempo,sexo,raza,vacuna,foto1,foto2,foto3,estadoeliminacion,user,verificacion;
+    String mascotaid,nombre,descripcion,ubicacion,fecha,estado;
+    String categoria,edad,tiempo,sexo,raza,vacuna,foto1,foto2,foto3;
+    String estadoeliminacion,user,verificacion;
 
     public Mascota(String mascotaid, String nombre, String descripcion, String ubicacion, String fecha, String estado, String categoria, String edad, String tiempo, String sexo, String raza, String vacuna, String foto1, String foto2, String foto3, String estadoeliminacion, String user, String verificacion) {
         this.mascotaid = mascotaid;

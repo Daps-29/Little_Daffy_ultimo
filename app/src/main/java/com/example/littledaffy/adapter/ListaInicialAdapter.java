@@ -1,6 +1,7 @@
 package com.example.littledaffy.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.littledaffy.MascotaDetalleActivity;
 import com.example.littledaffy.R;
 import com.example.littledaffy.model.MascotaDto;
 import com.squareup.picasso.Callback;
@@ -66,16 +68,16 @@ public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapte
         holder.nombre.setText(currentItem.getNombre());
         holder.edad.setText(String.valueOf(currentItem.getEdad()));
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(holder.context.getApplicationContext(), VerOrganizacionesActivity.class);
-//                intent.putExtra("user", currentItem.getUser());
-//                intent.putExtra("id_mascota", currentItem.getId_mascota());
-//                intent.putExtra("ubicacion", currentItem.getUbicacion());
-//                holder.context.startActivity(intent);
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.context.getApplicationContext(), MascotaDetalleActivity.class);
+                intent.putExtra("user", currentItem.getUser());
+                intent.putExtra("id_mascota", currentItem.getId_mascota());
+                intent.putExtra("ubicacion", currentItem.getUbicacion());
+                holder.context.startActivity(intent);
+           }
+        });
 
         Picasso.get().load(currentItem.getFoto1()).placeholder(R.drawable.a).into(holder.foto, new Callback() {
             @Override public void onSuccess() {

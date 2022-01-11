@@ -119,14 +119,11 @@ public class DashBoardFragment extends Fragment {
                 mascotaDtoArrayList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MascotaDto mascotaDto = dataSnapshot.getValue(MascotaDto.class);
-                    int estado = mascotaDto.getEstado();
-                    if (estado == 1) {
+
+                    if (mascotaDto.getVerificacion() == 1) {
                         progress_bar.setVisibility(View.GONE);
                         mascotaDtoArrayList.add(mascotaDto);
-                    }else{
-                        return;
                     }
-
                 }
 
                 listaInicialAdapter.notifyDataSetChanged();

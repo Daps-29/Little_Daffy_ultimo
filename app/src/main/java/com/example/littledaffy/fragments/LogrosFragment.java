@@ -85,8 +85,7 @@ public class LogrosFragment extends Fragment {
                 mascotaDtoArrayList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MascotaDto mascotaDto = dataSnapshot.getValue(MascotaDto.class);
-                    int estado = mascotaDto.getEstadoperdida();
-                    if (estado == 1) {
+                    if (mascotaDto.getEstado().equals("Encontrado")) {
                         mascotaDtoArrayList.add(mascotaDto);
                     }
 
@@ -109,8 +108,7 @@ public class LogrosFragment extends Fragment {
                 mascotaDtoArrayList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MascotaDto mascotaDto = dataSnapshot.getValue(MascotaDto.class);
-                    int estado = mascotaDto.getEstadoperdida();
-                    if (estado == 0) {
+                    if (mascotaDto.getEstado().equals("Adoptado")) {
                         mascotaDtoArrayList.add(mascotaDto);
                     }
 
