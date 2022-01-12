@@ -76,6 +76,7 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
 
         //OBTENER DATOS DE LA ANTERIOR ACTIVITY
         Intent intent = getIntent();
+
         organizacionId = intent.getStringExtra("id_organizacion");
         iddireccion = intent.getStringExtra("direccion");
         organizacionInfo = FirebaseDatabase.getInstance().getReference("organizaciones").child(organizacionId);

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.littledaffy.NuevaMacotaActivity;
 import com.example.littledaffy.R;
 import com.example.littledaffy.adapter.MascotasAdapter;
-import com.example.littledaffy.model.Masco;
+import com.example.littledaffy.model.MascotaDto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,7 +31,7 @@ public class MisMascotasFragment extends Fragment {
     DatabaseReference database;
     MascotasAdapter mascotasAdapter;
     FloatingActionButton btn;
-    ArrayList<Masco> list;
+    ArrayList<MascotaDto> list;
     private FirebaseAuth mFirebaseAuth;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,12 +61,12 @@ public class MisMascotasFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    Masco masco = dataSnapshot.getValue(Masco.class);
-                    String usermascota = masco.getUser();
+                    MascotaDto mascotaDto = dataSnapshot.getValue(MascotaDto.class);
+                    String usermascota = mascotaDto.getUser();
                     FirebaseUser usr = mFirebaseAuth.getCurrentUser();
                     String idu = usr.getUid();
-                    if (usermascota.equals(idu)) {
-                        list.add(masco);
+                    if (usermascota.equals(idu) && mascotaDto.getVerificacion() == 1 && mascotaDto.getEstado().equals("1")) {
+                        list.add(mascotaDto);
                     }
                 }
 

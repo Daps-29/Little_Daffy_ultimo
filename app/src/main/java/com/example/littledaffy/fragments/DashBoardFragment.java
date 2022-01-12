@@ -1,9 +1,11 @@
 package com.example.littledaffy.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -17,13 +19,21 @@ import com.example.littledaffy.adapter.CategoriesAdapter;
 import com.example.littledaffy.adapter.ListaInicialAdapter;
 import com.example.littledaffy.model.CategoriasDto;
 import com.example.littledaffy.model.MascotaDto;
+import com.example.littledaffy.model.RegisterHelper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DashBoardFragment extends Fragment {
 
@@ -36,18 +46,27 @@ public class DashBoardFragment extends Fragment {
 
 
     RecyclerView rv_mascotas;
-    DatabaseReference database;
+    Query userquery;
+    DatabaseReference database,userdatbase;
     ListaInicialAdapter listaInicialAdapter;
     ArrayList<MascotaDto> mascotaDtoArrayList;
     RecyclerView.LayoutManager layoutManager;
-
+    FirebaseAuth mAuth;
     ConstraintLayout progress_bar;
     SwipeRefreshLayout swipeRefreshLayout;
+    TextView nombre;
+    CircleImageView perfilfoto;
+    String idu;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_dashboard, container, false);
+        nombre = root.findViewById(R.id.nombreingreso);
+        perfilfoto = root.findViewById(R.id.profile_user);
+
+
 
 
 
@@ -99,7 +118,7 @@ public class DashBoardFragment extends Fragment {
         });
 
         updateMascotasList();
-
+        obtenernombres();
 
         return root;
 
@@ -120,20 +139,55 @@ public class DashBoardFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MascotaDto mascotaDto = dataSnapshot.getValue(MascotaDto.class);
 
-                    if (mascotaDto.getVerificacion() == 1) {
+                    if (mascotaDto.getVerificacion() == 1 && mascotaDto.getEstado().equals("1")) {
                         progress_bar.setVisibility(View.GONE);
                         mascotaDtoArrayList.add(mascotaDto);
+
                     }
                 }
 
                 listaInicialAdapter.notifyDataSetChanged();
             }
 
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+    }
+    public void obtenernombres(){
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        idu = user.getUid();
+        userquery = FirebaseDatabase.getInstance().getReference("usuarios").orderByChild("id").equalTo(idu);
+        userquery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    RegisterHelper registerHelper = new RegisterHelper();
+                    nombre.setText(registerHelper.getNombres());
+                    Picasso.get().load(registerHelper.getFoto()).placeholder(R.drawable.a).into(perfilfoto, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            Log.e("PICASSO ERROR", "onError: " + e);
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 

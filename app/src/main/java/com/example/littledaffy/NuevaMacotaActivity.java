@@ -1,7 +1,10 @@
 package com.example.littledaffy;
 
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -37,6 +40,7 @@ public class NuevaMacotaActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseAuth mFirebaseAuth;
     private int e;
+    Dialog dialog;
     //fotos
     ImageView image1,image2,image3;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
@@ -52,7 +56,7 @@ public class NuevaMacotaActivity extends AppCompatActivity {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("mascotas");
-
+        dialog = new Dialog(this);
         //fotos
         image1 = findViewById(R.id.imagen1);
         image2 = findViewById(R.id.imagen2);
@@ -169,8 +173,9 @@ public class NuevaMacotaActivity extends AppCompatActivity {
                             String mascotaid = databaseReference.push().getKey();
                             MascotaDto mascotaDto = new MascotaDto(mascotaid,e,estadoeli,publicacion,tiem,verificacion,cate,fec,ra,se,uri.toString(),uri.toString(),uri.toString(),ubi,vacu,idu,nom,des);
                             databaseReference.child("").child(mascotaid).setValue(mascotaDto);
+                            opendialog();
                             Toast.makeText(NuevaMacotaActivity.this, "Guardado", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(NuevaMacotaActivity.this, MainActivity.class));
+
 
 
                         }else{
@@ -270,6 +275,28 @@ public class NuevaMacotaActivity extends AppCompatActivity {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap map = MimeTypeMap.getSingleton();
         return map.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+    public void opendialog(){
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView btnclose = dialog.findViewById(R.id.closebtn);
+        Button aceptar = dialog.findViewById(R.id.btnaceptar);
+
+        btnclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NuevaMacotaActivity.this, MainActivity.class));
+            }
+        });
+        dialog.show();
+
     }
 
 }

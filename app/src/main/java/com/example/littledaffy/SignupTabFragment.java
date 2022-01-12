@@ -90,10 +90,10 @@ public class SignupTabFragment extends Fragment {
                     String email1 = correo.getText().toString();
                     String pass1 = contraseña.getText().toString();
                     id = mAuth.getCurrentUser().getUid();
-                    int tipou = 1;
+                    String tipou = "1";
                     String idu= id;
                     String direc = "";
-                    String foto ="";
+                    String foto ="foto aqui";
                     String telefono="";
                     String sexo ="";
                     RegisterHelper registerHelper = new RegisterHelper(name1,ape1,email1,pass1,idu,tipou,direc,foto,telefono,sexo);

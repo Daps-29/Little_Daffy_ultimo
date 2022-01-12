@@ -55,18 +55,25 @@
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable-xhdpi/ic_more.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable-xhdpi/ic_plus.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable-xxxhdpi/categoria_selected.xml" value="0.1" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/button_background.xml" value="0.15197368421052632" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/categoria_selected.xml" value="0.1" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/ic_account.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1504885993485342" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/ic_baseline_add_photo_alternate_24.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/ic_baseline_delete_25.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/input_bg.xml" value="0.1" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/layout_bg.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/spinner.xml" value="0.1" />
-        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/about_us_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/top_button_background.xml" value="0.15197368421052632" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/drawable/white_background.xml" value="0.15197368421052632" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/about_us_fragment.xml" value="0.15" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/activity_introductory.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/activity_maps.xml" value="0.11646174863387979" />
-        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/activity_mascota_detalle.xml" value="0.16" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/activity_mascota_detalle.xml" value="0.2" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/activity_mascotas.xml" value="0.18" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/activity_mascotas_vacio.xml" value="0.12056010928961748" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/activity_nueva_macota.xml" value="0.18" />
@@ -78,17 +85,19 @@
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/card_mascota.xml" value="0.18" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/card_organizaciones.xml" value="0.25" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/dashboard_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/dialog.xml" value="0.18" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/dialogeliminar.xml" value="0.12" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/drawer_menu.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/fragment_adoptados.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/fragment_logros.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/fragment_mis_mascotas.xml" value="0.1" />
-        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/fragment_my_profile.xml" value="0.1" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/fragment_my_profile.xml" value="0.18" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/fragment_on_boarding1.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/fragment_organizaciones.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/item_option.xml" value="0.22" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/login_tab_fragment.xml" value="0.1" />
-        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/my_profile_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/my_profile_fragment.xml" value="0.15" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/nearby_res_fragment.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/settings_fragment.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/signup_tab_fragment.xml" value="0.1" />

@@ -2,12 +2,12 @@ package com.example.littledaffy.model;
 
 public class RegisterHelper {
     String nombres, apellidos, correo, contraseña,id,direccion,foto,telefono,sexo;
-    int tipou;
+    String tipou;
     public RegisterHelper() {
 
     }
 
-    public RegisterHelper(String nombres, String apellidos, String correo, String contra,String id,int tipou,String direccion,String foto, String telefono, String sexo) {
+    public RegisterHelper(String nombres, String apellidos, String correo, String contra,String id,String tipou,String direccion,String foto, String telefono, String sexo) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;
@@ -52,11 +52,11 @@ public class RegisterHelper {
         this.contraseña = contraseña;
     }
 
-    public int getTipou() {
+    public String getTipou() {
         return tipou;
     }
 
-    public void setTipou(int tipou) {
+    public void setTipou(String tipou) {
         this.tipou = tipou;
     }
 

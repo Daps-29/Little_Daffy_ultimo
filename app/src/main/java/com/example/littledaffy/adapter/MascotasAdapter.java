@@ -1,10 +1,14 @@
 package com.example.littledaffy.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,19 +17,27 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littledaffy.R;
-import com.example.littledaffy.model.Masco;
+import com.example.littledaffy.model.MascotaDto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MascotasAdapter extends RecyclerView.Adapter<MascotasAdapter.MyviewHolder> {
     Context context;
-    ArrayList<Masco> list;
-    public MascotasAdapter(Context context, ArrayList<Masco> list) {
+    ArrayList<MascotaDto> list;
+    DatabaseReference databaseReference;
+    Dialog dialog;
+    String mascotaid;
+    public MascotasAdapter(Context context, ArrayList<MascotaDto> list) {
         this.context = context;
         this.list = list;
+        dialog = new Dialog(this.context);
     }
 
     @NonNull
@@ -37,16 +49,17 @@ public class MascotasAdapter extends RecyclerView.Adapter<MascotasAdapter.Myview
 
     @Override
     public void onBindViewHolder(@NonNull MyviewHolder holder, int position) {
-        Masco masco = list.get(position);
-        holder.nombre.setText(masco.getNombre());
-        holder.descipcion.setText(masco.getDescripcion());
-
+        MascotaDto mascotaDto = list.get(position);
+        holder.nombre.setText(mascotaDto.getNombre());
+        holder.descipcion.setText(mascotaDto.getDescripcion());
+        mascotaid = mascotaDto.getId_mascota();
 
         holder.delte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(context, LogrosActivity.class);
-                //context.startActivity(intent);
+
+                boorardialog();
+
             }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +69,7 @@ public class MascotasAdapter extends RecyclerView.Adapter<MascotasAdapter.Myview
                 //context.startActivity(intent);
             }
         });
-        Picasso.get().load(masco.getFoto1()).placeholder(R.drawable.a).into(holder.img, new Callback() {
+        Picasso.get().load(mascotaDto.getFoto1()).placeholder(R.drawable.a).into(holder.img, new Callback() {
             @Override public void onSuccess() {
 
             }
@@ -81,6 +94,7 @@ public class MascotasAdapter extends RecyclerView.Adapter<MascotasAdapter.Myview
         FloatingActionButton btn;
         public MyviewHolder(@NonNull View itemView) {
             super(itemView);
+
             nombre = (TextView) itemView.findViewById(R.id.nombrem);
             descipcion = (TextView) itemView.findViewById(R.id.descripcionm);
             img = (ImageView) itemView.findViewById(R.id.imagen);
@@ -89,5 +103,35 @@ public class MascotasAdapter extends RecyclerView.Adapter<MascotasAdapter.Myview
 
         }
     }
+    public void boorardialog(){
+        dialog.setContentView(R.layout.dialogeliminar);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView btnclose = dialog.findViewById(R.id.closebtn);
+        Button aceptar = dialog.findViewById(R.id.btnaceptar);
+
+        btnclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                MascotaDto mascotaDto = new MascotaDto();
+                DatabaseReference base = FirebaseDatabase.getInstance().getReference("mascotas");
+                Map<String,Object> eliminar = new HashMap<>();
+                eliminar.put("estado","0");
+                base.child(mascotaid).updateChildren(eliminar);
+                dialog.dismiss();
+
+            }
+        });
+        dialog.show();
+
+    }
+
 
 }

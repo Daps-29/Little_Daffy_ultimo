@@ -1,5 +1,13 @@
 package com.example.littledaffy;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,15 +20,6 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -62,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     private String pa = "";
     private EditText coreo;
     private EditText pass;
+    String photourl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,20 +202,32 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    int tipo = 1;
+
                     FirebaseUser usr = mFirebaseAuth.getCurrentUser();
                     if (task.getResult().getAdditionalUserInfo().isNewUser()){
                         String idu = usr.getUid();
                         String correo = usr.getEmail();
                         String nombre = usr.getDisplayName();
+
+                        if(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl() != null){
+                            photourl = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString();
+                        }else{
+                            photourl = "Aca va la foto";
+                        }
+
+
                         HashMap<Object,String> DatosUusuario = new HashMap<>();
                         DatosUusuario.put("id",idu);
                         DatosUusuario.put("correo",correo);
-                        DatosUusuario.put("nombre",nombre);
+                        DatosUusuario.put("nombres",nombre);
                         DatosUusuario.put("telefono","");
                         DatosUusuario.put("direccion","");
-                        DatosUusuario.put("foto","");
+                        DatosUusuario.put("foto",photourl);
                         DatosUusuario.put("sexo","");
                         DatosUusuario.put("tipou","1");
+                        DatosUusuario.put("apellidos","");
+                        DatosUusuario.put("contraseña","");
 
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference reference = database.getReference("usuarios");
