@@ -59,6 +59,7 @@ public class DashBoardFragment extends Fragment {
     String idu;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -160,13 +161,14 @@ public class DashBoardFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         idu = user.getUid();
-        userquery = FirebaseDatabase.getInstance().getReference("usuarios").orderByChild("id").equalTo(idu);
-        userquery.addValueEventListener(new ValueEventListener() {
+        userdatbase = FirebaseDatabase.getInstance().getReference("usuarios");
+
+        userdatbase.child(idu).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    RegisterHelper registerHelper = new RegisterHelper();
-                    nombre.setText(registerHelper.getNombres());
+                    RegisterHelper registerHelper = snapshot.getValue(RegisterHelper.class);
+                    nombre.setText(registerHelper.getNombres()+" "+registerHelper.getApellidos());
                     Picasso.get().load(registerHelper.getFoto()).placeholder(R.drawable.a).into(perfilfoto, new Callback() {
                         @Override
                         public void onSuccess() {

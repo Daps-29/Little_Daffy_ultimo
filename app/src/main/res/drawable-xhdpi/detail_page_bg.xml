@@ -5,7 +5,4 @@
         android:endColor="#F9F9F9
 "/>
 
-    <corners android:topLeftRadius="50dp"
-        android:topRightRadius="50dp"/>
-
 </shape>

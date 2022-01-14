@@ -2,10 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
-    android:layout_height="350dp"
+    android:layout_width="210dp"
+    android:layout_height="270dp"
     android:layout_margin="10dp"
-    android:backgroundTint="#00FFFFFF"
     android:clickable="true"
     android:clipToPadding="true"
     android:focusable="true"
@@ -15,61 +14,94 @@
 
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/mascotaImage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="140dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/a"
             app:riv_corner_radius="12dp"
             tools:ignore="ContentDescription" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="145dp"
+            android:paddingLeft="7dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/estadomascota"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="Adopción"
+                android:paddingLeft="10dp"
+                android:background="@drawable/ic_cat_bg"
+                android:textColor="@android:color/white">
 
+            </TextView>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_weight="0"
-            android:background="@drawable/shape"
-            android:gravity="center|bottom"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:paddingLeft="20dp"
+            android:paddingTop="170dp">
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/nombreMascota"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:orientation="vertical">
+                android:text="Nombre Mascota"
+                android:textSize="18dp"
+                android:textColor="@color/plomo">
 
-                <TextView
-                    android:id="@+id/nombreMascota"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Nombre mascota"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/edad"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Edad"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp" />
-            </LinearLayout>
+            </TextView>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="195dp">
+
+            <TextView
+                android:id="@+id/edad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edad Mascota"
+                android:textSize="18dp"
+
+                android:textColor="@color/plomo">
+
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="220dp">
+
+            <TextView
+                android:id="@+id/ubicacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ubicacion"
+                android:textSize="18dp"
+                android:textColor="@color/plomo">
+
+            </TextView>
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -108,7 +108,7 @@ public class NuevaMacotaActivity extends AppCompatActivity {
         sexo = findViewById(R.id.sexomascota);
         btnagregar = findViewById(R.id.guardar);
 
-        String[]Estado={"Adpción","Perdida"};
+        String[]Estado={"Adpción","Desaparecido"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Estado);
         estado.setAdapter(adapter);
 

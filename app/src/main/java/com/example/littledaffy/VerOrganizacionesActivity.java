@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.littledaffy.databinding.ActivityMapsBinding;
 import com.example.littledaffy.model.DireccionDto;
 import com.example.littledaffy.model.OrganizacionDto;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -50,7 +49,6 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
     String celOrga;
 
     private GoogleMap mMap;
-    private ActivityMapsBinding binding;
     FloatingActionButton verGoogleMapsOrganizacion;
 
     @Override
@@ -62,7 +60,7 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.icon_back);
+        toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.verde), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
 

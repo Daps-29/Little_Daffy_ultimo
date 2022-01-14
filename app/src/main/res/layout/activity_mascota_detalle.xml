@@ -5,27 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".MascotaDetalleActivity">
+    tools:context=".MascotaDetalleActivity"
+    android:fitsSystemWindows="true">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back" />
 
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="450dp"
+        android:layout_height="470dp"
         android:background="@drawable/detail_page_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:fitsSystemWindows="true"
+        android:paddingTop="70dp">>
 
 
         <TextView
@@ -33,12 +27,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/ic_cat_bg"
             android:fontFamily="serif"
             android:gravity="center"
             android:text="10 meses"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@android:color/white"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +46,7 @@
             android:fontFamily="serif"
             android:gravity="center"
             android:text="Perro"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@android:color/white"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/edadinfo"
             app:layout_constraintStart_toEndOf="@+id/edadinfo"
@@ -68,7 +62,7 @@
             android:fontFamily="serif"
             android:gravity="center"
             android:text="Adopción"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@android:color/white"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/edadinfo"
             app:layout_constraintStart_toEndOf="@+id/edadinfo"
@@ -83,6 +77,7 @@
             android:layout_marginEnd="32dp"
             android:fontFamily="serif"
             android:text="Pelusa"
+            android:paddingLeft="13dp"
             android:textColor="@android:color/background_dark"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/textView12"
@@ -103,15 +98,29 @@
             app:layout_constraintTop_toTopOf="@+id/nombremascotainfo" />
 
         <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="Descripción:"
+            android:paddingLeft="13dp"
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/descripcioninfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nombremascotainfo" />
+
+        <TextView
             android:id="@+id/descripcioninfo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="serif"
             android:lineSpacingExtra="2dp"
             android:text="Es la que se perdio ayer"
+            android:paddingLeft="13dp"
             android:textColor="@android:color/background_dark"
             app:layout_constraintEnd_toEndOf="@+id/textView12"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/nombremascotainfo"
             app:layout_constraintTop_toBottomOf="@+id/nombremascotainfo" />
 
@@ -131,10 +140,11 @@
 
         <TextView
             android:id="@+id/nombredetalleuser"
-            android:layout_width="151dp"
-            android:layout_height="49dp"
+            android:layout_width="193dp"
+            android:layout_height="51dp"
+            android:paddingTop="15dp"
+            android:paddingLeft="10dp"
             android:fontFamily="serif"
-            android:gravity="center"
             android:text="Fernando Murguia"
             android:textColor="@android:color/background_dark"
 
@@ -144,20 +154,19 @@
             app:layout_constraintVertical_bias="0.285" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/llam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/telf"
+            android:layout_width="63dp"
+            android:layout_height="56dp"
             android:layout_gravity="start|bottom"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="28dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="@color/fondo"
+
             android:src="@drawable/icon_whatsapp"
             app:elevation="2dp"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.823"
-            app:layout_constraintStart_toEndOf="@+id/nombredetalleuser" />
+            app:layout_constraintHorizontal_bias="0.932"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nombredetalleuser" />
 
         <TextView
             android:id="@+id/textView7"
@@ -166,34 +175,40 @@
             android:layout_marginStart="12dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="serif"
-            android:textColor="@android:color/background_dark"
             android:text="Publicado por:"
+            android:textColor="@android:color/background_dark"
             app:layout_constraintBottom_toTopOf="@+id/imagendetalle"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <ViewFlipper
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="76dp"
-        android:autoStart="true"
-        android:flipInterval="5000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/fotodetalle"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/a" />
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="25dp"
+            android:fitsSystemWindows="true"
+            android:paddingTop="-5dp"
+            >
 
-        <ImageView
-            android:id="@+id/fotodetalle2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/mascota" />
-    </ViewFlipper>
+
+            <com.smarteist.autoimageslider.SliderLayout
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                android:fitsSystemWindows="true">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="35dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_back" />
+            </com.smarteist.autoimageslider.SliderLayout>
+
+        </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

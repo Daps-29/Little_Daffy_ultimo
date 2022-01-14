@@ -28,7 +28,7 @@ public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapte
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nombre, edad;
+        TextView nombre, edad,estado,ubicacion;
         ImageView foto;
         Context context;
 
@@ -37,6 +37,8 @@ public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapte
             super(v);
             nombre = (TextView) v.findViewById(R.id.nombreMascota);
             edad = (TextView) v.findViewById(R.id.edad);
+            estado = (TextView) v.findViewById(R.id.estadomascota);
+            ubicacion = (TextView) v.findViewById(R.id.ubicacion);
             foto = (ImageView) v.findViewById(R.id.mascotaImage);
             context = v.getContext();
         }
@@ -66,7 +68,9 @@ public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapte
         final MascotaDto currentItem = data.get(position);
 
         holder.nombre.setText(currentItem.getNombre());
-        holder.edad.setText(String.valueOf(currentItem.getEdad()));
+        holder.estado.setText(currentItem.getEstadoperdida());
+        holder.edad.setText(currentItem.getEdad()+" "+ currentItem.getTiempo());
+        holder.ubicacion.setText(currentItem.getUbicacion());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
