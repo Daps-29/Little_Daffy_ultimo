@@ -3,8 +3,10 @@ package com.example.littledaffy;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.model.MascotaDto;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,7 +51,7 @@ public class NuevaMacotaActivity extends AppCompatActivity {
     Uri uri1;
     Uri uri2;
     String id_foto;
-
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -298,5 +301,19 @@ public class NuevaMacotaActivity extends AppCompatActivity {
         dialog.show();
 
     }
+    @Override
+    public void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
+
 
 }

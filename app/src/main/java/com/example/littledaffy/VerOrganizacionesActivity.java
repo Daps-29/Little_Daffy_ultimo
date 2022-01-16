@@ -1,7 +1,9 @@
 package com.example.littledaffy;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.model.DireccionDto;
 import com.example.littledaffy.model.OrganizacionDto;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -50,7 +53,7 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
 
     private GoogleMap mMap;
     FloatingActionButton verGoogleMapsOrganizacion;
-
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //setTheme(R.style.AppTheme);
@@ -239,6 +242,18 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
         return true;
     }
 
+    @Override
+    public void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
 
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 
 }

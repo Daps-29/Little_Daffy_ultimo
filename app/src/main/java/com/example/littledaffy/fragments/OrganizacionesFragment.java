@@ -1,5 +1,7 @@
 package com.example.littledaffy.fragments;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littledaffy.R;
+import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.adapter.OrganizacionAdapter;
 import com.example.littledaffy.model.OrganizacionDto;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +32,7 @@ public class OrganizacionesFragment extends Fragment {
     ArrayList<OrganizacionDto> organizacionDtoList;
 
     RecyclerView.LayoutManager layoutManager;
-
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_organizaciones, container, false);
@@ -75,5 +78,17 @@ public class OrganizacionesFragment extends Fragment {
 
         return root;
     }
+    @Override
+    public void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        requireActivity().registerReceiver(networkChangeListener,filter);
 
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        requireActivity().unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

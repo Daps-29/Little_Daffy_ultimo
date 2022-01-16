@@ -1,5 +1,7 @@
 package com.example.littledaffy.fragments;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.littledaffy.R;
+import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.model.RegisterHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,7 +34,9 @@ public class MyProfileFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_my_profile, container, false);
@@ -75,5 +80,17 @@ public class MyProfileFragment extends Fragment {
 
         return root;
     }
+    @Override
+    public void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        requireActivity().registerReceiver(networkChangeListener,filter);
 
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        requireActivity().unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

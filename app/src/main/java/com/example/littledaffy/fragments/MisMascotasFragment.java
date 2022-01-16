@@ -1,6 +1,8 @@
 package com.example.littledaffy.fragments;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littledaffy.NuevaMacotaActivity;
 import com.example.littledaffy.R;
+import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.adapter.MascotasAdapter;
 import com.example.littledaffy.model.MascotaDto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +36,7 @@ public class MisMascotasFragment extends Fragment {
     FloatingActionButton btn;
     ArrayList<MascotaDto> list;
     private FirebaseAuth mFirebaseAuth;
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.activity_mascotas, container, false);
@@ -79,5 +83,18 @@ public class MisMascotasFragment extends Fragment {
             }
         });
         return root;
+    }
+    @Override
+    public void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        requireActivity().registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        requireActivity().unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

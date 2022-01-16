@@ -1,5 +1,7 @@
 package com.example.littledaffy.fragments;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littledaffy.R;
+import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.adapter.LogrosAdapter;
 import com.example.littledaffy.model.MascotaDto;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +37,7 @@ public class LogrosFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     Button encontrados, adoptados;
     TextView vacio, estado_logro;
-
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -122,5 +125,18 @@ public class LogrosFragment extends Fragment {
 
             }
         });
+    }
+    @Override
+    public void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        requireActivity().registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        requireActivity().unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

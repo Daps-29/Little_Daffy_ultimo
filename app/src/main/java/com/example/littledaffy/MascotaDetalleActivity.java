@@ -1,6 +1,8 @@
 package com.example.littledaffy;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.model.MascotaDto;
 import com.example.littledaffy.model.RegisterHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,6 +46,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
     SliderLayout sliderLayout;
     String telf;
 
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,5 +181,18 @@ public class MascotaDetalleActivity extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    public void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener,filter);
+
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

@@ -1,5 +1,7 @@
 package com.example.littledaffy.fragments;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.littledaffy.R;
+import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.adapter.CategoriesAdapter;
 import com.example.littledaffy.adapter.ListaInicialAdapter;
 import com.example.littledaffy.model.CategoriasDto;
@@ -58,7 +61,7 @@ public class DashBoardFragment extends Fragment {
     CircleImageView perfilfoto;
     String idu;
 
-
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -192,5 +195,17 @@ public class DashBoardFragment extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        requireActivity().registerReceiver(networkChangeListener,filter);
 
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        requireActivity().unregisterReceiver(networkChangeListener);
+        super.onStop();
+    }
 }

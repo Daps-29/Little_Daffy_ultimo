@@ -8,11 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -24,7 +20,6 @@ public class IntroductoryActivity extends AppCompatActivity {
 
     private static final int NUM_PAGES = 3;
     private ViewPager viewPager;
-    private ScreenSlidePagerAdapter pagerAdapter;
 
     Animation anim;
 
@@ -41,7 +36,6 @@ public class IntroductoryActivity extends AppCompatActivity {
         lottieAnimationView = findViewById(R.id.splash);
 
 
-        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         //viewPager.setAdapter(pagerAdapter);
 
         anim = AnimationUtils.loadAnimation(this, R.anim.o_b_anim);
@@ -56,6 +50,8 @@ public class IntroductoryActivity extends AppCompatActivity {
             public void run() {
                 mSharedPref = getSharedPreferences("SharedPref",MODE_PRIVATE);
                 boolean isFirstTime = mSharedPref.getBoolean("firstTime",true);
+
+                startActivity(new Intent(IntroductoryActivity.this, Informacion1Activity.class));
 
                 if (isFirstTime){
                     SharedPreferences.Editor editor =mSharedPref.edit();
@@ -72,28 +68,6 @@ public class IntroductoryActivity extends AppCompatActivity {
             }
         }, SPLASH_TIME_OUT);
     }
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter{
 
-        public ScreenSlidePagerAdapter(@NonNull FragmentManager fm) {
-            super(fm);
-        }
 
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            switch (position){
-                case 0:
-                LoginTabFragment tab1 = new LoginTabFragment();
-                return tab1;
-
-            }
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-
-            return NUM_PAGES;
-        }
-    }
 }
