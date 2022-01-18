@@ -2,6 +2,7 @@ package com.example.littledaffy.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.littledaffy.CambiarmascotaActivity;
 import com.example.littledaffy.R;
 import com.example.littledaffy.model.MascotaDto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,6 +36,7 @@ public class MascotasAdapter extends RecyclerView.Adapter<MascotasAdapter.Myview
     DatabaseReference databaseReference;
     Dialog dialog;
     String mascotaid;
+
     public MascotasAdapter(Context context, ArrayList<MascotaDto> list) {
         this.context = context;
         this.list = list;
@@ -52,6 +55,7 @@ public class MascotasAdapter extends RecyclerView.Adapter<MascotasAdapter.Myview
         MascotaDto mascotaDto = list.get(position);
         holder.nombre.setText(mascotaDto.getNombre());
         holder.descipcion.setText(mascotaDto.getDescripcion());
+        holder.estamo.setText(mascotaDto.getEstadoperdida());
         mascotaid = mascotaDto.getId_mascota();
 
         holder.delte.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +69,11 @@ public class MascotasAdapter extends RecyclerView.Adapter<MascotasAdapter.Myview
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(context, OrganizacionActivity.class);
-                //context.startActivity(intent);
+                Intent intent = new Intent(holder.context.getApplicationContext(), CambiarmascotaActivity.class);
+                intent.putExtra("id_mascota", mascotaDto.getId_mascota());
+                intent.putExtra("nombre", mascotaDto.getNombre());
+                intent.putExtra("descripcion", mascotaDto.getDescripcion());
+                holder.context.startActivity(intent);
             }
         });
         Picasso.get().load(mascotaDto.getFoto1()).placeholder(R.drawable.a).into(holder.img, new Callback() {
@@ -88,7 +95,8 @@ public class MascotasAdapter extends RecyclerView.Adapter<MascotasAdapter.Myview
 
     public static class MyviewHolder extends RecyclerView.ViewHolder{
 
-        TextView nombre,descipcion;
+        Context context;
+        TextView nombre,descipcion,estamo;
         ImageView img;
         ImageButton delte;
         FloatingActionButton btn;
@@ -96,10 +104,13 @@ public class MascotasAdapter extends RecyclerView.Adapter<MascotasAdapter.Myview
             super(itemView);
 
             nombre = (TextView) itemView.findViewById(R.id.nombrem);
+            estamo = (TextView) itemView.findViewById(R.id.estamo);
             descipcion = (TextView) itemView.findViewById(R.id.descripcionm);
             img = (ImageView) itemView.findViewById(R.id.imagen);
             delte = (ImageButton) itemView.findViewById(R.id.delete);
             btn = (FloatingActionButton) itemView.findViewById(R.id.nuevamascota);
+            context = itemView.getContext();
+
 
         }
     }

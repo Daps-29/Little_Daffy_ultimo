@@ -13,44 +13,61 @@ public class DireccionDto implements Parcelable {
                         String calle,
                         String referencia,
                         String iduser,
-                        String direccionLiteral,
                         String latitud,
-                        String longitud){
+                        String longitud,
+                        String direccionLiteral) {
         this.idDireccion = idDireccion;
         this.calle = calle;
         this.referencia = referencia;
+        this.iduser = iduser;
         this.latitud = latitud;
         this.longitud = longitud;
         this.direccionLiteral = direccionLiteral;
     }
 
+
     public String getIdDireccion() {
         return idDireccion;
+    }
+
+    public void setIdDireccion(String idDireccion) {
+        this.idDireccion = idDireccion;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
 
     public String getIduser() {
         return iduser;
     }
 
-    public String getLatitud() {
-        return latitud;
-    }
-
-    public String getLongitud() {
-        return longitud;
-    }
-
-
-    public void setidDireccion(String idDireccion) {
-        this.idDireccion = idDireccion;
-    }
-
     public void setIduser(String iduser) {
         this.iduser = iduser;
     }
 
+    public String getLatitud() {
+        return latitud;
+    }
+
     public void setLatitud(String latitud) {
         this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
     }
 
     public void setLongitud(String longitud) {
@@ -64,26 +81,6 @@ public class DireccionDto implements Parcelable {
     public void setDireccionLiteral(String direccionLiteral) {
         this.direccionLiteral = direccionLiteral;
     }
-
-    public String getCalle() {
-        return calle;
-    }
-
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
-
-
-
-    public String getReferencia() {
-        return referencia;
-    }
-
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
-    }
-
-
 
     public DireccionDto(Parcel in){
         String[] data = new String[13];

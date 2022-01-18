@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,6 +11,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,6 +21,8 @@
         android:id="@+id/fotoperfil"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="center"
         android:padding="3dp"
         android:src="@drawable/a"
@@ -33,13 +36,15 @@
         android:id="@+id/nombreperfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_below="@+id/fotoperfil"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
         android:text="Jack Willson"
         android:textColor="#ffffff"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/fotoperfil"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/fotoperfil"
         app:layout_constraintTop_toBottomOf="@+id/fotoperfil" />
 
@@ -47,28 +52,29 @@
         android:id="@+id/correoperfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/nombreperfil"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
         android:text="jackwillson@gmail.com"
         android:textColor="#ffffff"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/nombreperfil"
-        app:layout_constraintStart_toStartOf="@+id/nombreperfil"
-        app:layout_constraintTop_toBottomOf="@+id/nombreperfil" />
+        android:textSize="18sp"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="250dp">
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentBottom="true">
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="24dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/white_background"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -92,7 +98,7 @@
                     android:layout_weight="1"
                     android:text="Cambiar"
                     android:textAlignment="viewEnd"
-                    android:textColor="#5b5b5b"
+                    android:textColor="@color/plomo"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -119,15 +125,14 @@
                     android:textColor="@color/fondo"
                     android:textSize="18sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/telefonoperfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Sin número"
-                    android:inputType="number"
+                    android:text="76275987"
                     android:textAlignment="viewEnd"
-                    android:textColor="#5b5b5b"
+                    android:textColor="@color/plomo"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -154,14 +159,14 @@
                     android:textColor="@color/fondo"
                     android:textSize="18sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/generoperfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Sin llenar"
+                    android:text="Hombre"
                     android:textAlignment="viewEnd"
-                    android:textColor="#5b5b5b"
+                    android:textColor="@color/plomo"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -188,14 +193,14 @@
                     android:textColor="@color/fondo"
                     android:textSize="18sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/direccionperfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Sin dirección"
+                    android:text="Ciudad Stelite"
                     android:textAlignment="viewEnd"
-                    android:textColor="#5b5b5b"
+                    android:textColor="@color/plomo"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -205,21 +210,22 @@
                 android:layout_margin="10dp"
                 android:alpha="0.5"
                 android:background="#585858" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:gravity="center"
-                android:paddingTop="0dp">
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <Button
                     android:id="@+id/btneditarperfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Guardar Perfil"
                     android:gravity="center"
-                    android:textColor="#fff"
-                    ></Button>
+                    android:text="Editar Perfil"
+                    android:textColor="#fff"></Button>
 
             </LinearLayout>
 
@@ -237,4 +243,4 @@
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -8,6 +8,11 @@
     <string name="heading_two">Instant Notifications</string>
     <string name="heading_three">Cashless Payment</string>
     <string name="heading_fourth">Pay Anywhere</string>
+    //ubicacion
+    <string name="latitud_usuario">latitud_usuario</string>
+    <string name="longitud_usuario">longitud_usuario</string>
+    <string name="alias_direccion">alias_direccion</string>
+    <string name="direccion_literal">direccion_literal</string>
 
     //Description
     <string name="desc_one">Grow your Business By Accepting Card Payments with The New Card Reader</string>

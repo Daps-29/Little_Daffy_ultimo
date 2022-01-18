@@ -2,6 +2,7 @@ package com.example.littledaffy;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.model.MascotaDto;
@@ -37,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MascotaDetalleActivity extends AppCompatActivity {
     CircleImageView imag;
-    TextView nombreuser,edad,categoria,estado,nombremascotainfo,descipcion,raza;
+    TextView nombreuser,edad,categoria,estado,nombremascotainfo,descipcion;
     ImageView foto1,foto2,back;
     String mascotaid,iduser,nombremascota;
     DatabaseReference mascotainfo, infouser;
@@ -56,6 +58,11 @@ public class MascotaDetalleActivity extends AppCompatActivity {
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_mascota_detalle);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_back);
+        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.verde), PorterDuff.Mode.SRC_ATOP);
+        setSupportActionBar(toolbar);
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -64,7 +71,6 @@ public class MascotaDetalleActivity extends AppCompatActivity {
         estado = findViewById(R.id.estadoinfo);
         nombremascotainfo = findViewById(R.id.nombremascotainfo);
         descipcion = findViewById(R.id.descripcioninfo);
-        raza = findViewById(R.id.razadetalle);
         whatsapp = findViewById(R.id.telf);
 
         imag = findViewById(R.id.imagendetalle);
@@ -101,7 +107,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
 
-                nombreuser.setText(registerHelper.getNombres()+" "+registerHelper.getApellidos());
+                nombreuser.setText(registerHelper.getNombres());
                 telf = registerHelper.getTelefono()+"";
                 Picasso.get().load(registerHelper.getFoto()).placeholder(R.drawable.a).into(imag, new Callback() {
                     @Override
@@ -152,7 +158,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
                 categoria.setText(mascotaDto.getCategorias());
                 descipcion.setText(mascotaDto.getDescripcion());
                 estado.setText(mascotaDto.getSexo());
-                raza.setText(mascotaDto.getRaza());
+
 
                 for (int i = 0; i<3; i++){
                     DefaultSliderView sliderView = new DefaultSliderView(MascotaDetalleActivity.this);
@@ -195,5 +201,10 @@ public class MascotaDetalleActivity extends AppCompatActivity {
     public void onStop() {
         unregisterReceiver(networkChangeListener);
         super.onStop();
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

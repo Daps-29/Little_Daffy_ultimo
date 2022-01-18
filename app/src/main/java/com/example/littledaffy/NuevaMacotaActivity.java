@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
@@ -28,16 +30,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.model.MascotaDto;
+import com.example.littledaffy.model.RegisterHelper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.Calendar;
 
 public class NuevaMacotaActivity extends AppCompatActivity {
     private EditText nombre,descripcion,ubicacion,edad,raza,vacuna,fecha;
@@ -58,12 +66,13 @@ public class NuevaMacotaActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private DatePickerDialog datePickerDialog;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+    static boolean active = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nueva_macota);
 
-
+        verificarTelefonoUsuario();
         mFirebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("mascotas");
         dialog = new Dialog(this);
@@ -137,11 +146,12 @@ public class NuevaMacotaActivity extends AppCompatActivity {
         String[]Sexo={"Macho","Hembra"};
         ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Sexo);
         sexo.setAdapter(adapter3);
-
+        Calendar calendar = Calendar.getInstance();
         btnagregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (uri != null && uri1 != null && uri2 != null) {
+                    verificarTelefonoUsuario();
                     progressDialog = new ProgressDialog(NuevaMacotaActivity.this);
                     progressDialog.show();
                     progressDialog.setContentView(R.layout.progresdialog);
@@ -330,12 +340,68 @@ public class NuevaMacotaActivity extends AppCompatActivity {
         registerReceiver(networkChangeListener,filter);
 
         super.onStart();
+        active = true;
     }
 
     @Override
     public void onStop() {
         unregisterReceiver(networkChangeListener);
         super.onStop();
+        active = false;
+    }
+
+    Dialog dialog1;
+    private void verificarTelefonoUsuario(){
+
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if(userId.length() > 0){
+            FirebaseDatabase.getInstance().getReference("usuarios")
+                    .child(userId)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists()){
+                                RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
+                                if(registerHelper != null){
+                                    if(registerHelper.getTelefono() == null || registerHelper.getTelefono().equals("")){
+
+                                        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(NuevaMacotaActivity.this);
+                                        LayoutInflater inflater = (LayoutInflater) getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                                        final View customLayout = inflater.inflate(R.layout.alert, null);
+                                        builder.setView(customLayout);
+                                        TextView tituloAlerta = (TextView) customLayout.findViewById(R.id.tituloAlerta);
+                                        tituloAlerta.setText("Número de telefono!");
+                                        TextView mensajeAlerta = (TextView) customLayout.findViewById(R.id.textoAlerta);
+                                        mensajeAlerta.setText("Para brindar una mejor experiencia debes agregar tu número de celular.");
+                                        Button btnActualizar = (Button) customLayout.findViewById(R.id.btnActualizar);
+                                        btnActualizar.setText("Agregar Número");
+                                        btnActualizar.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog1.dismiss();
+                                                Intent intent = new Intent(NuevaMacotaActivity.this, MainActivity.class);
+                                                startActivity(intent);
+                                            }
+                                        });
+                                        builder.setCancelable(false);
+                                        if (active){
+                                            dialog1 = builder.show();
+                                        }
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(), "Por favor manten tu número de celular actualizado", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+        }
+
     }
 
 
