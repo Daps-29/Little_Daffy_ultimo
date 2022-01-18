@@ -1,5 +1,6 @@
 package com.example.littledaffy;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class LoginTabFragment extends Fragment {
     private LoginButton loginButton;
     private FirebaseAuth.AuthStateListener authStateListener;
     private AccessTokenTracker accessTokenTracker;
+    ProgressDialog progressDialog;
     private static final String TAG = "Autorizado";
     @Nullable
     @Override
@@ -90,6 +92,10 @@ public class LoginTabFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    progressDialog = new ProgressDialog(LoginTabFragment.this.getContext());
+                    progressDialog.show();
+                    progressDialog.setContentView(R.layout.progresdialog);
+                    progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
                     startActivity(new Intent(LoginTabFragment.this.getContext(),MainActivity.class));
 
                 }else{

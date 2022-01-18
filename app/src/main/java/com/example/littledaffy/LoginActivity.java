@@ -1,5 +1,6 @@
 package com.example.littledaffy;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,7 +46,7 @@ import java.util.HashMap;
 public class LoginActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
-    FloatingActionButton google;
+    FloatingActionButton google,face;
     private Button loginb;
     private GoogleSignInClient mgoogleSignInClient;
     float v=0;
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText coreo;
     private EditText pass;
     String photourl;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
         google = findViewById(R.id.fab_google);
+        face = findViewById(R.id.face);
         //login
         coreo = findViewById(R.id.correo);
         pass = findViewById(R.id.contra);
@@ -233,6 +236,11 @@ public class LoginActivity extends AppCompatActivity {
                         DatabaseReference reference = database.getReference("usuarios");
                         reference.child(idu).setValue(DatosUusuario);
                     }
+                    progressDialog = new ProgressDialog(LoginActivity.this);
+                    progressDialog.show();
+                    progressDialog.setContentView(R.layout.progresdialog);
+                    progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
+
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 }else{
                     Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
@@ -266,5 +274,6 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
+
 
 }

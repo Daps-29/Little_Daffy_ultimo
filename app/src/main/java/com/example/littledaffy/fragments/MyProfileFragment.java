@@ -28,7 +28,8 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyProfileFragment extends Fragment {
-    TextView nombre,correo,telefono,genero,direccion;
+    TextView nombre,correo,telefono,direccion;
+    TextView genero;
     CircleImageView perfil;
     String id;
 
@@ -58,6 +59,9 @@ public class MyProfileFragment extends Fragment {
                 String name = registerHelper.getNombres();
                 nombre.setText(name+" "+registerHelper.getApellidos());
                 correo.setText(registerHelper.getCorreo());
+                telefono.setText(registerHelper.getTelefono());
+                direccion.setText(registerHelper.getDireccion());
+                genero.setText(registerHelper.getSexo());
                 Picasso.get().load(registerHelper.getFoto()).placeholder(R.drawable.a).into(perfil, new Callback() {
                     @Override
                     public void onSuccess() {

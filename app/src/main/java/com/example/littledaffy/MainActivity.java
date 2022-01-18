@@ -1,14 +1,19 @@
 package com.example.littledaffy;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -25,7 +30,10 @@ import com.example.littledaffy.fragments.LogrosFragment;
 import com.example.littledaffy.fragments.MisMascotasFragment;
 import com.example.littledaffy.fragments.MyProfileFragment;
 import com.example.littledaffy.fragments.OrganizacionesFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
@@ -41,18 +49,34 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private static final int POS_MIS_MASCOTAS = 4;
     private static final int POS_LOGROS = 5;
     private static final int POS_SALIR = 7;
+    public static String CHANNEL_ID = "101";
 
     private String[] screenTitles;
     private Drawable[] screenIcons;
 
     private SlidingRootNav slidingRootNav;
     FirebaseAuth firebaseAuth;
+    private static final String TAG = "NOTIFICACION";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        createNotificationChannel();
+        topic();
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
 
+                if (!task.isSuccessful()){
+                    Log.d(TAG, "FALLO OBTENER TOKEN");
+                }else{
+                    String token = task.getResult();
+                    Log.d(TAG, "TOKEN ES "+token);
+                }
+            }
+        });
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -183,7 +207,30 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         transaction.addToBackStack(null);
         transaction.commit();
     }
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Notificacion";
+            String description = "Recibir notificacion";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
 
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+    private void topic(){
+        FirebaseMessaging.getInstance().subscribeToTopic("todos")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        //Toast.makeText(MainActivity.this, "suscrito", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
 
 

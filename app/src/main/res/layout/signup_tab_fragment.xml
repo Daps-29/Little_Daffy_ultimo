@@ -1,86 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
+
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingTop="10dp"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingBottom="10dp"
+            android:text="Nombres:"
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/nombre"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="50dp"
             android:background="@drawable/edit_color"
-            android:hint="Nombre"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
             android:paddingBottom="10dp"
-            app:layout_constraintWidth_percent=".8" />
+            android:text="Apellidos:"
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/apellido"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@drawable/edit_color"
-            android:hint="Apellido"
-            android:minHeight="48dp"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
             android:paddingBottom="10dp"
-            app:layout_constraintWidth_percent=".8" />
+            android:text="Correo:"
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/correo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@drawable/edit_color"
-            android:hint="Correo"
-            android:minHeight="48dp"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintWidth_percent=".8" />
-
-        <EditText
-            android:id="@+id/contra"
+            android:paddingBottom="10dp" />
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:text="Contraseña:"
+            android:textSize="18dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/contra"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edit_color"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Confirmar contraseña:"
+            android:textSize="18dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/contraconfir"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:background="@drawable/edit_color"
-            android:hint="Contraseña"
-            android:minHeight="48dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintWidth_percent=".8" />
+            android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:paddingTop="20dp">
+        <Button
+            android:id="@+id/registrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:fontFamily="serif"
+            android:text="Registrar"
 
-
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/registrar"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="304dp"
-        android:background="@drawable/button_bg"
-        android:fontFamily="serif"
-
-        android:text="Registrar"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".8" />
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
+</ScrollView>

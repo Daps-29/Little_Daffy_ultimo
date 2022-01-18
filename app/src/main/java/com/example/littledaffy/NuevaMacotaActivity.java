@@ -1,6 +1,8 @@
 package com.example.littledaffy;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,8 +40,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class NuevaMacotaActivity extends AppCompatActivity {
-    private EditText nombre,descripcion,ubicacion,fecha,edad,raza,vacuna;
+    private EditText nombre,descripcion,ubicacion,edad,raza,vacuna,fecha;
     private Spinner estado,categoria,tiempo,sexo;
+    private TextView mostrarfecha;
     private Button btnagregar;
     private DatabaseReference databaseReference;
     private FirebaseAuth mFirebaseAuth;
@@ -51,11 +55,14 @@ public class NuevaMacotaActivity extends AppCompatActivity {
     Uri uri1;
     Uri uri2;
     String id_foto;
+    ProgressDialog progressDialog;
+    private DatePickerDialog datePickerDialog;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nueva_macota);
+
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("mascotas");
@@ -111,6 +118,11 @@ public class NuevaMacotaActivity extends AppCompatActivity {
         sexo = findViewById(R.id.sexomascota);
         btnagregar = findViewById(R.id.guardar);
 
+
+
+
+
+
         String[]Estado={"Adpción","Desaparecido"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Estado);
         estado.setAdapter(adapter);
@@ -130,6 +142,10 @@ public class NuevaMacotaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (uri != null && uri1 != null && uri2 != null) {
+                    progressDialog = new ProgressDialog(NuevaMacotaActivity.this);
+                    progressDialog.show();
+                    progressDialog.setContentView(R.layout.progresdialog);
+                    progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
                     uploadimagetofirebase(uri,uri1,uri2);
 
                 }else{
@@ -139,6 +155,8 @@ public class NuevaMacotaActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 
     public void uploadimagetofirebase(Uri uri,Uri uri1,Uri uri2){
@@ -176,8 +194,9 @@ public class NuevaMacotaActivity extends AppCompatActivity {
                             String mascotaid = databaseReference.push().getKey();
                             MascotaDto mascotaDto = new MascotaDto(mascotaid,e,estadoeli,publicacion,tiem,verificacion,cate,fec,ra,se,uri.toString(),uri.toString(),uri.toString(),ubi,vacu,idu,nom,des);
                             databaseReference.child("").child(mascotaid).setValue(mascotaDto);
+
                             opendialog();
-                            Toast.makeText(NuevaMacotaActivity.this, "Guardado", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NuevaMacotaActivity.this, "Guardado con exito", Toast.LENGTH_SHORT).show();
 
 
 
@@ -280,6 +299,10 @@ public class NuevaMacotaActivity extends AppCompatActivity {
         return map.getExtensionFromMimeType(contentResolver.getType(uri));
     }
     public void opendialog(){
+        progressDialog = new ProgressDialog(NuevaMacotaActivity.this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.progresdialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
         dialog.setContentView(R.layout.dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 

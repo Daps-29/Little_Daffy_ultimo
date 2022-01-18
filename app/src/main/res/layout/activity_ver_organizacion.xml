@@ -197,15 +197,15 @@
         android:src="@drawable/icon_whatsapp"
         android:contentDescription="Add"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/fondo"/>
+        android:backgroundTint="@color/white"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/verGoogleMapsOrganizacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/fondo"
+        android:backgroundTint="@color/white"
         android:layout_gravity="start|bottom"
-        android:src="@drawable/icon_whatsapp"
+        android:src="@drawable/ic_baseline_location_on_24"
         app:fabSize="mini"
         android:layout_margin="16dp"
         app:elevation="2dp"
