@@ -114,10 +114,35 @@
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/layout/verificar_internet.xml" value="0.13012295081967212" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/drawable-v24/shape.xml" value="0.15197368421052632" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/drawable-xhdpi/detail_page_bg.xml" value="0.240625" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/drawable-xhdpi/ic_back.xml" value="0.240625" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/drawable-xhdpi/ic_cat_bg.xml" value="0.15197368421052632" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/drawable/button_bg.xml" value="0.240625" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/drawable/calendar.xml" value="0.240625" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/drawable/gradiente_background.xml" value="0.240625" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/drawable/ic_location_on_black_24dp.xml" value="0.240625" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/drawable/ic_menu_black_24dp.xml" value="0.240625" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/about_us_fragment.xml" value="0.11594202898550725" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/activity_direecion.xml" value="0.1417763157894737" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/activity_informacion1.xml" value="0.11594202898550725" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/activity_introductory.xml" value="0.11594202898550725" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/activity_login.xml" value="0.14" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/activity_mascota_detalle.xml" value="0.18" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/activity_registro.xml" value="0.14" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/activity_ver_organizacion.xml" value="0.16" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/alert.xml" value="0.1" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/card_lista_inicial.xml" value="0.25" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/card_mascota.xml" value="0.1417763157894737" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/dashboard_fragment.xml" value="0.1417763157894737" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/fragment_dashboard.xml" value="0.16" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/fragment_my_profile.xml" value="0.16" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/login_tab_fragment.xml" value="0.16" />
+        <entry key="..\:/Users/ferna/OneDrive/Escritorio/codigos/DaffyRemoto/Little_Daffy_ultimo/app/src/main/res/layout/signup_tab_fragment.xml" value="0.15" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

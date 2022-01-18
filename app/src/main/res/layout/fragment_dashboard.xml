@@ -14,13 +14,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_user"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="start"
                 android:src="@drawable/a"
                 android:layout_marginStart="15dp"
@@ -61,7 +61,7 @@
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_mascota"
@@ -88,15 +88,26 @@
 
 
 
-            <LinearLayout
+                <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
 
-            <LinearLayout
+                <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Categorias"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="5dp"
+                    android:textColor="@color/plomo"
+                    android:layout_marginLeft="10dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_categorias"
@@ -108,7 +119,38 @@
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Publicaciones"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_gravity="start"
+                        android:gravity="start"
+                        android:textColor="@color/plomo"
+                        android:layout_marginLeft="10dp" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/verTodo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ver todo"
+                    android:layout_gravity="end"
+                    android:textSize="18sp"
+                    android:layout_marginTop="-30dp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/fondo" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_bar"
@@ -138,9 +180,10 @@
                 </ImageView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+                <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_mascotas"
                             android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.example.littledaffy;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.model.MascotaDto;
@@ -55,6 +57,11 @@ public class MascotaDetalleActivity extends AppCompatActivity {
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_mascota_detalle);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_back);
+        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.verde), PorterDuff.Mode.SRC_ATOP);
+        setSupportActionBar(toolbar);
 
 
 
@@ -194,5 +201,10 @@ public class MascotaDetalleActivity extends AppCompatActivity {
     public void onStop() {
         unregisterReceiver(networkChangeListener);
         super.onStop();
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
