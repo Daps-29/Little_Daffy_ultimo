@@ -68,7 +68,7 @@ public class LogrosAdapter extends RecyclerView.Adapter<LogrosAdapter.MyViewHold
         final MascotaDto currentItem = data.get(position);
 
         holder.nombre.setText(currentItem.getNombre());
-        holder.edad.setText(String.valueOf(currentItem.getEdad()));
+        holder.edad.setText(String.valueOf(currentItem.getDescripcion()));
         holder.estado_logro.setText(String.valueOf(currentItem.getEstado()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

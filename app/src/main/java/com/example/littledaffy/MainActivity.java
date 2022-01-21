@@ -174,7 +174,11 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //if user pressed "yes", then he is allowed to exit from application
-                System.exit(0);
+                //finish();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LittleDaffy">
         <activity
+            android:name=".EditarUsuarioActivity"
+            android:exported="false" />
+        <activity
             android:name=".CambiarmascotaActivity"
             android:exported="false" />
         <activity
@@ -76,6 +79,7 @@
 
         <activity android:name=".VerOrganizacionesActivity" />
         <activity android:name=".DireecionActivity" />
+        <activity android:name=".FacebookActivity" />
 
         <service
             android:name=".Notificaciones"

@@ -1,5 +1,6 @@
 package com.example.littledaffy;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +38,7 @@ public class CambiarmascotaActivity extends AppCompatActivity {
     Button guardar;
     String idmascota,nombremascota,descripcionmascota;
     DatabaseReference mascotainfo;
+    ProgressDialog progressDialog;
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,12 @@ public class CambiarmascotaActivity extends AppCompatActivity {
                 DatabaseReference base = FirebaseDatabase.getInstance().getReference("mascotas");
                 Map<String,Object> actualizar = new HashMap<>();
                 actualizar.put("estado",estadomascota);
+                progressDialog = new ProgressDialog(CambiarmascotaActivity.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progresdialog);
+                startActivity(new Intent(CambiarmascotaActivity.this, MainActivity.class));
+                Toast.makeText(CambiarmascotaActivity.this, "Cambiaste el estado de la mascota", Toast.LENGTH_SHORT).show();
+
                 base.child(idmascota).updateChildren(actualizar);
             }
         });

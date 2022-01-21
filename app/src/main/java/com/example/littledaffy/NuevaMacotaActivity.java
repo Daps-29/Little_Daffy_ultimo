@@ -18,6 +18,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -48,12 +49,13 @@ import com.google.firebase.storage.UploadTask;
 import java.util.Calendar;
 
 public class NuevaMacotaActivity extends AppCompatActivity {
-    private EditText nombre,descripcion,ubicacion,edad,raza,vacuna,fecha;
+    private EditText nombre,descripcion,ubicacion,edad,raza,vacuna;
     private Spinner estado,categoria,tiempo,sexo;
     private TextView mostrarfecha;
-    private Button btnagregar;
+    private Button btnagregar,fecha;
     private DatabaseReference databaseReference;
     private FirebaseAuth mFirebaseAuth;
+    int dia,mes,ano;
     private int e;
     Dialog dialog;
     //fotos
@@ -65,6 +67,7 @@ public class NuevaMacotaActivity extends AppCompatActivity {
     String id_foto;
     ProgressDialog progressDialog;
     private DatePickerDialog datePickerDialog;
+
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     static boolean active = false;
     @Override
@@ -126,7 +129,29 @@ public class NuevaMacotaActivity extends AppCompatActivity {
         tiempo = findViewById(R.id.tiempo);
         sexo = findViewById(R.id.sexomascota);
         btnagregar = findViewById(R.id.guardar);
+        mostrarfecha = findViewById(R.id.mostrarfecha);
 
+        fecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view==fecha){
+                    Calendar calendar = Calendar.getInstance();
+                    dia = calendar.get(Calendar.DAY_OF_MONTH);
+                    mes = calendar.get(Calendar.MONTH);
+                    ano = calendar.get(Calendar.YEAR);
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(NuevaMacotaActivity.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+
+                            mostrarfecha.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+
+                        }
+                    },dia, mes, ano);
+                    datePickerDialog.show();
+
+                }
+            }
+        });
 
 
 
@@ -185,7 +210,7 @@ public class NuevaMacotaActivity extends AppCompatActivity {
                         String nom = nombre.getText().toString();
                         String des = descripcion.getText().toString();
                         String ubi = ubicacion.getText().toString();
-                        String fec = fecha.getText().toString();
+                        String fec = mostrarfecha.getText().toString();
                         String ed = edad.getText().toString();
                         e = Integer.parseInt(edad.getText().toString());
                         String ra = raza.getText().toString();

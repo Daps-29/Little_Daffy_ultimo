@@ -39,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MascotaDetalleActivity extends AppCompatActivity {
     CircleImageView imag;
-    TextView nombreuser,edad,categoria,estado,nombremascotainfo,descipcion;
+    TextView nombreuser,edad,categoria,estado,nombremascotainfo,descipcion,raza,vacuna;
     ImageView foto1,foto2,back;
     String mascotaid,iduser,nombremascota;
     DatabaseReference mascotainfo, infouser;
@@ -68,6 +68,8 @@ public class MascotaDetalleActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         edad = findViewById(R.id.edadinfo);
         categoria = findViewById(R.id.categoriainfo);
+        raza = findViewById(R.id.raza);
+        vacuna = findViewById(R.id.vacunas);
         estado = findViewById(R.id.estadoinfo);
         nombremascotainfo = findViewById(R.id.nombremascotainfo);
         descipcion = findViewById(R.id.descripcioninfo);
@@ -107,7 +109,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
 
-                nombreuser.setText(registerHelper.getNombres());
+                nombreuser.setText(registerHelper.getNombres()+" "+registerHelper.getApellidos());
                 telf = registerHelper.getTelefono()+"";
                 Picasso.get().load(registerHelper.getFoto()).placeholder(R.drawable.a).into(imag, new Callback() {
                     @Override
@@ -158,7 +160,8 @@ public class MascotaDetalleActivity extends AppCompatActivity {
                 categoria.setText(mascotaDto.getCategorias());
                 descipcion.setText(mascotaDto.getDescripcion());
                 estado.setText(mascotaDto.getSexo());
-
+                raza.setText(mascotaDto.getRaza());
+                vacuna.setText(mascotaDto.getVacuna());
 
                 for (int i = 0; i<3; i++){
                     DefaultSliderView sliderView = new DefaultSliderView(MascotaDetalleActivity.this);

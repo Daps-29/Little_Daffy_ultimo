@@ -140,6 +140,7 @@ public class DashBoardFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mascotaDtoArrayList.clear();
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MascotaDto mascotaDto = dataSnapshot.getValue(MascotaDto.class);
 

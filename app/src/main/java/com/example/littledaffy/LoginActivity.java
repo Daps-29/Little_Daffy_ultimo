@@ -104,6 +104,18 @@ public class LoginActivity extends AppCompatActivity {
 
         crearsolicitud();
 
+
+        face.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, FacebookActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
+
+
+
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-        // login email
+
 
     }
     private void crearsolicitud(){
@@ -173,8 +185,40 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Log.d(TAG, "EXITO");
-                    FirebaseUser user = mFirebaseAuth.getCurrentUser();
-                    updateUI(user);
+                    FirebaseUser usr = mFirebaseAuth.getCurrentUser();
+                    if (task.getResult().getAdditionalUserInfo().isNewUser()){
+                        String idu = usr.getUid();
+                        String correo = usr.getEmail();
+                        String nombre = usr.getDisplayName();
+
+                        if(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl() != null){
+                            photourl = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString();
+                        }else{
+                            photourl = "Aca va la foto";
+                        }
+
+
+                        HashMap<Object,String> DatosUusuario = new HashMap<>();
+                        DatosUusuario.put("id",idu);
+                        DatosUusuario.put("correo",correo);
+                        DatosUusuario.put("nombres",nombre);
+                        DatosUusuario.put("telefono","");
+                        DatosUusuario.put("direccion","");
+                        DatosUusuario.put("foto",photourl);
+                        DatosUusuario.put("sexo","");
+                        DatosUusuario.put("tipou","1");
+                        DatosUusuario.put("apellidos","");
+                        DatosUusuario.put("contraseña","");
+
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference reference = database.getReference("usuarios");
+                        reference.child(idu).setValue(DatosUusuario);
+                    }
+                    progressDialog = new ProgressDialog(LoginActivity.this);
+                    progressDialog.show();
+                    progressDialog.setContentView(R.layout.progresdialog);
+                    progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.white);
+                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 }else{
                     Log.d(TAG, "Error", task.getException());
                     Toast.makeText(LoginActivity.this, "Fallo", Toast.LENGTH_SHORT).show();

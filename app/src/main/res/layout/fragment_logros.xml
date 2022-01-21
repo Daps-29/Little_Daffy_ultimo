@@ -6,7 +6,7 @@
     android:id="@+id/linearLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fondo"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".LogrosActivity">
@@ -45,7 +45,7 @@
                 android:textAllCaps="false"
                 android:padding="10dp"
                 android:textColor="@android:color/white"
-                android:text="Mascotas Adoptadas"
+                android:text="Adoptados"
                 android:gravity="center"/>
 
             <Button
@@ -55,7 +55,7 @@
                 android:layout_marginLeft="10dp"
                 android:textAllCaps="false"
                 android:padding="10dp"
-                android:text="Mascotas Encontradas"
+                android:text="Encontrados"
                 android:textColor="@android:color/white"
                 android:background="@drawable/boton_redondo"
                 android:gravity="center"/>

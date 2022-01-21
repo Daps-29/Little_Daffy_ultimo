@@ -1,5 +1,6 @@
 package com.example.littledaffy.fragments;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -7,11 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.littledaffy.EditarUsuarioActivity;
 import com.example.littledaffy.R;
 import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.model.RegisterHelper;
@@ -32,6 +35,7 @@ public class MyProfileFragment extends Fragment {
     TextView genero;
     CircleImageView perfil;
     String id;
+    Button editar;
 
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
@@ -49,6 +53,16 @@ public class MyProfileFragment extends Fragment {
         genero = root.findViewById(R.id.generoperfil);
         direccion = root.findViewById(R.id.direccionperfil);
         perfil = root.findViewById(R.id.fotoperfil);
+        editar = root.findViewById(R.id.btneditarperfil);
+
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MyProfileFragment.this.getContext(), EditarUsuarioActivity.class));
+            }
+        });
+
+
         FirebaseUser urs = mAuth.getCurrentUser();
         id = urs.getUid();
 
