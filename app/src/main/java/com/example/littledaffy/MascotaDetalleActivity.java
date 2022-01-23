@@ -3,6 +3,7 @@ package com.example.littledaffy;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PorterDuff;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.littledaffy.Utility.NetworkChangeListener;
+import com.example.littledaffy.model.DireccionDto;
 import com.example.littledaffy.model.MascotaDto;
 import com.example.littledaffy.model.RegisterHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,14 +41,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MascotaDetalleActivity extends AppCompatActivity {
     CircleImageView imag;
-    TextView nombreuser,edad,categoria,estado,nombremascotainfo,descipcion,raza,vacuna;
+    TextView nombreuser,edad,categoria,estado,nombremascotainfo,descipcion,raza,vacuna, DistanciaUbicacion;
     ImageView foto1,foto2,back;
     String mascotaid,iduser,nombremascota;
     DatabaseReference mascotainfo, infouser;
     FloatingActionButton whatsapp;
     FirebaseAuth mAuth;
     SliderLayout sliderLayout;
-    String telf;
+    String telf, id;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
@@ -66,6 +68,8 @@ public class MascotaDetalleActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser urs = mAuth.getCurrentUser();
+        id = urs.getUid();
         edad = findViewById(R.id.edadinfo);
         categoria = findViewById(R.id.categoriainfo);
         raza = findViewById(R.id.raza);
@@ -74,6 +78,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
         nombremascotainfo = findViewById(R.id.nombremascotainfo);
         descipcion = findViewById(R.id.descripcioninfo);
         whatsapp = findViewById(R.id.telf);
+        DistanciaUbicacion = findViewById(R.id.DistanciaUbicacion);
 
         imag = findViewById(R.id.imagendetalle);
         nombreuser = findViewById(R.id.nombredetalleuser);
@@ -98,7 +103,6 @@ public class MascotaDetalleActivity extends AppCompatActivity {
         Intent intent = getIntent();
         iduser = intent.getStringExtra("user");
         mascotaid = intent.getStringExtra("id_mascota");
-//        nombremascota = intent.getStringExtra("nombre");
         mascotainfo = FirebaseDatabase.getInstance().getReference("mascotas").child(mascotaid);
         infouser = FirebaseDatabase.getInstance().getReference("usuarios").child(iduser);
         FirebaseUser user = mAuth.getCurrentUser();
@@ -122,6 +126,64 @@ public class MascotaDetalleActivity extends AppCompatActivity {
                         Log.e("PICASSO ERROR", "onError: " + e);
                     }
                 });
+
+                FirebaseDatabase.getInstance().getReference("direcciones")
+                        .child(registerHelper.getDireccion())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()){
+                                    DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
+                                    Location ubicacionMascota = new Location("Ubicacion mascota");
+                                    ubicacionMascota.setLatitude(Double.parseDouble(direccionDto.getLatitud()));
+                                    ubicacionMascota.setLongitude(Double.parseDouble(direccionDto.getLongitud()));
+
+                                    FirebaseDatabase.getInstance().getReference("usuarios")
+                                            .child(id)
+                                            .addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    if(dataSnapshot.exists()){
+                                                        RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
+                                                        FirebaseDatabase.getInstance().getReference("direcciones")
+                                                                .child(registerHelper.getDireccion())
+                                                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                    @Override
+                                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                        if (dataSnapshot.exists()){
+                                                                            DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
+                                                                            Location ubicacionUsuario = new Location("Ubicacion Usuario");
+                                                                            ubicacionUsuario.setLatitude(Double.parseDouble(direccionDto.getLatitud()));
+                                                                            ubicacionUsuario.setLongitude(Double.parseDouble(direccionDto.getLongitud()));
+
+                                                                            if (direccionDto.getLongitud() == null || direccionDto.getLatitud() == null){
+                                                                                return;
+                                                                            }
+                                                                            float distance = ubicacionMascota.distanceTo(ubicacionUsuario);
+                                                                            double distancia = distance/1000;
+                                                                            distancia =  Math.round(distancia * 100.0)/100.0;
+                                                                            DistanciaUbicacion.setText(String.valueOf(distancia) + " Km");
+
+                                                                        }
+                                                                    }
+                                                                    @Override
+                                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                                    }
+                                                                });
+
+                                                    }
+                                                }
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                }
+                                            });
+
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
 
             }
 

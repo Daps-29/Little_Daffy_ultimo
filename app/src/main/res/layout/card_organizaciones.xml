@@ -82,7 +82,7 @@
                         android:orientation="horizontal">
 
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/profile_image_menu"
+                            android:id="@+id/organizacion_foto"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_gravity="center"

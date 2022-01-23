@@ -9,34 +9,116 @@ public class OrganizacionDto {
     private String id_organizacion, descripcion, direccion, direccion_literal;
     private String foto, foto_portada;
     private String horaen, horafin;
-    private String nombre;
+    private String nombre, latitud, longitud, referencia;
+    private String lunes, martes, miercoles, jueves, viernes, sabado, domingo;
 
-    public static final String TABLE_NAME = "organizaciones";
-    public static final String COLUMN_ID_ORGANIZACION = "id_organizacion";
-    public static final String COLUMN_NOMBRE = "nombre";
-    public static final String COLUMN_HORAEN = "horaen";
-    public static final String COLUMN_HORAFIN = "horafin";
-    public static final String COLUMN_FOTO = "foto";
-    public static final String COLUMN_FOTO_PORTADA = "foto_portada";
-    public static final String COLUMN_DESCRIPCION = "descripcion";
-    public static final String COLUMN_DIRECCION = "direccion";
-    public static final String COLUMN_DIRECCION_LITERAL = "direccion_literal";
-    public static final String COLUMN_CONTACTO = "contacto";
+    //CONSTRUCTOR
+    public OrganizacionDto(){}
 
-    /* DATABASE CALLS */
+    public OrganizacionDto(int estado_organizacion, int contacto, String id_organizacion, String descripcion, String direccion, String direccion_literal, String foto, String foto_portada, String horaen, String horafin, String nombre, String latitud, String longitud, String referencia, String lunes, String martes, String miercoles, String jueves, String viernes, String sabado, String domingo) {
+        this.estado_organizacion = estado_organizacion;
+        this.contacto = contacto;
+        this.id_organizacion = id_organizacion;
+        this.descripcion = descripcion;
+        this.direccion = direccion;
+        this.direccion_literal = direccion_literal;
+        this.foto = foto;
+        this.foto_portada = foto_portada;
+        this.horaen = horaen;
+        this.horafin = horafin;
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.referencia = referencia;
+        this.lunes = lunes;
+        this.martes = martes;
+        this.miercoles = miercoles;
+        this.jueves = jueves;
+        this.viernes = viernes;
+        this.sabado = sabado;
+        this.domingo = domingo;
+    }
 
-    public static final String CREATE_TABLE =
-            "CREATE TABLE " + TABLE_NAME + "("
-                    + COLUMN_ID_ORGANIZACION + "INTEGER PRIMARY KEY,"
-                    + COLUMN_NOMBRE + "TEXT,"
-                    + COLUMN_CONTACTO + "INTEGER,"
-                    + COLUMN_HORAEN + "TEXT,"
-                    + COLUMN_HORAFIN + "TEXT,"
-                    + COLUMN_FOTO + "TEXT,"
-                    + COLUMN_FOTO_PORTADA + "TEXT,"
-                    + COLUMN_DESCRIPCION + "TEXT,"
-                    + COLUMN_DIRECCION_LITERAL + "TEXT,"
-                    + ")";
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
+
+    public String getLunes() {
+        return lunes;
+    }
+
+    public void setLunes(String lunes) {
+        this.lunes = lunes;
+    }
+
+    public String getMartes() {
+        return martes;
+    }
+
+    public void setMartes(String martes) {
+        this.martes = martes;
+    }
+
+    public String getMiercoles() {
+        return miercoles;
+    }
+
+    public void setMiercoles(String miercoles) {
+        this.miercoles = miercoles;
+    }
+
+    public String getJueves() {
+        return jueves;
+    }
+
+    public void setJueves(String jueves) {
+        this.jueves = jueves;
+    }
+
+    public String getViernes() {
+        return viernes;
+    }
+
+    public void setViernes(String viernes) {
+        this.viernes = viernes;
+    }
+
+    public String getSabado() {
+        return sabado;
+    }
+
+    public void setSabado(String sabado) {
+        this.sabado = sabado;
+    }
+
+    public String getDomingo() {
+        return domingo;
+    }
+
+    public void setDomingo(String domingo) {
+        this.domingo = domingo;
+    }
 
 
     public String getId_organizacion() {
@@ -128,32 +210,9 @@ public class OrganizacionDto {
     }
 
 
-    //CONSTRUCTOR
-    public OrganizacionDto(String id_organizacion,
-                           String descripcion,
-                           String direccion,
-                           String direccion_literal,
-                           int contacto,
-                           String foto,
-                           String foto_portada,
-                           int estado_organizacion,
-                           String horaen,
-                           String horafin,
-                           String nombre){
-        this.id_organizacion = id_organizacion;
-        this.descripcion = descripcion;
-        this.direccion = direccion;
-        this.direccion_literal = direccion_literal;
-        this.contacto = contacto;
-        this.foto = foto;
-        this.foto_portada = foto_portada;
-        this.estado_organizacion = estado_organizacion;
-        this.horaen = horaen;
-        this.horafin = horafin;
-        this.nombre = nombre;
-    }
 
-    public OrganizacionDto(){}
+
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.littledaffy.fragments;
 
 import android.content.IntentFilter;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,11 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.littledaffy.R;
 import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.adapter.OrganizacionAdapter;
+import com.example.littledaffy.model.DireccionDto;
 import com.example.littledaffy.model.OrganizacionDto;
+import com.example.littledaffy.model.RegisterHelper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class OrganizacionesFragment extends Fragment {
 
@@ -32,7 +39,12 @@ public class OrganizacionesFragment extends Fragment {
     ArrayList<OrganizacionDto> organizacionDtoList;
 
     RecyclerView.LayoutManager layoutManager;
+    String id;
+    private FirebaseAuth mAuth;
+    SwipeRefreshLayout swipeRefreshLayout;
+
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_organizaciones, container, false);
@@ -49,35 +61,97 @@ public class OrganizacionesFragment extends Fragment {
         organizacionDtoList = new ArrayList<>();
         organizacionAdapter = new OrganizacionAdapter(getContext(),organizacionDtoList);
         rv_subcategoria.setAdapter(organizacionAdapter);
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser urs = mAuth.getCurrentUser();
+        id = urs.getUid();
+
+        //ACTUALIZAR LISTA
+        swipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                updateList();
+            }
+        });
 
 
 
+        CargarOrganizaciones();
+
+        return root;
+    }
+
+    private void updateList(){
+        CargarOrganizaciones();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    private void CargarOrganizaciones() {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 organizacionDtoList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     OrganizacionDto organizacionDto = dataSnapshot.getValue(OrganizacionDto.class);
+
                     int estado = organizacionDto.getEstado_organizacion();
+
+                    Location ubicacionOrganizacion = new Location("Ubicacion Organizacion");
+                    ubicacionOrganizacion.setLatitude(Double.parseDouble(organizacionDto.getLatitud()));
+                    ubicacionOrganizacion.setLongitude(Double.parseDouble(organizacionDto.getLongitud()));
+
                     if (estado == 1) {
-                        organizacionDtoList.add(organizacionDto);
-                    }else{
-                        return;
+
+                        FirebaseDatabase.getInstance().getReference("usuarios")
+                                .child(id)
+                                .addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if(dataSnapshot.exists()){
+                                            RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
+                                            FirebaseDatabase.getInstance().getReference("direcciones")
+                                                    .child(registerHelper.getDireccion())
+                                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                            if (dataSnapshot.exists()){
+                                                                DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
+                                                                Location ubicacionUsuario = new Location("Ubicacion Usuario");
+                                                                ubicacionUsuario.setLatitude(Double.parseDouble(direccionDto.getLatitud()));
+                                                                ubicacionUsuario.setLongitude(Double.parseDouble(direccionDto.getLongitud()));
+
+                                                                if (direccionDto.getLongitud() == null || direccionDto.getLatitud() == null){
+                                                                    return;
+                                                                }
+                                                                float distance = ubicacionUsuario.distanceTo(ubicacionOrganizacion);
+                                                                if (distance < 8000){
+                                                                    organizacionDtoList.add(organizacionDto);
+                                                                    organizacionAdapter.notifyDataSetChanged();
+                                                                }else{
+                                                                    return;
+                                                                }
+                                                            }
+                                                        }
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                        }
+                                                    });
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
                     }
-
                 }
-
                 organizacionAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
-        return root;
     }
+
     @Override
     public void onStart() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -91,4 +165,6 @@ public class OrganizacionesFragment extends Fragment {
         requireActivity().unregisterReceiver(networkChangeListener);
         super.onStop();
     }
+
+
 }

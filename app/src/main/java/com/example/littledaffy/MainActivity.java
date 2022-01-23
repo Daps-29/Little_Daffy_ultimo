@@ -1,5 +1,6 @@
 package com.example.littledaffy;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationChannel;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -25,6 +27,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -276,9 +279,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                                         btnActualizar.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                dialog.dismiss();
-                                                Intent intent = new Intent(MainActivity.this, DireecionActivity.class);
-                                                startActivity(intent);
+                                                dameubicacion();
                                             }
                                         });
                                         builder.setCancelable(false);
@@ -376,6 +377,19 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         }
 
     }
+    private void dameubicacion(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
+//            Toast.makeText(this, "Gracias", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            Intent intent = new Intent(MainActivity.this, UbicacionActivity.class);
+            startActivity(intent);
+        }else{
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION},1);
+        }
+    }
+
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library

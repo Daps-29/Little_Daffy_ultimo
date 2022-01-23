@@ -404,7 +404,7 @@ public class NuevaMacotaActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(View v) {
                                                 dialog1.dismiss();
-                                                Intent intent = new Intent(NuevaMacotaActivity.this, MainActivity.class);
+                                                Intent intent = new Intent(NuevaMacotaActivity.this, EditarUsuarioActivity.class);
                                                 startActivity(intent);
                                             }
                                         });

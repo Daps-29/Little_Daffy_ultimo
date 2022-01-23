@@ -53,13 +53,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
         holder.categoriaName.setText(currentItem.getNombre_categoria());
         holder.categoriaImg.setImageDrawable(currentItem.getFoto_categoria());
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                row_index = position;
-                notifyDataSetChanged();
-            }
-        });
+
         if (row_index == position){
             holder.cardView.setBackgroundResource(R.drawable.categoria_selected);
         }else{

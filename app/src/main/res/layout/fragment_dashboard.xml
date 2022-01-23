@@ -178,7 +178,37 @@
                             android:visibility="visible">
 
                         </ImageView>
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:id="@+id/listavacia"
+                        android:visibility="gone">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:text="Aún no se encontraron publicaciones"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:padding="5dp"
+                            android:layout_gravity="center"
+                            android:gravity="start"
+                            android:textColor="@color/plomo"
+                            android:layout_marginLeft="10dp" />
+                        <ImageView
+                            android:id="@+id/Image"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:src="@drawable/as"
+                            android:layout_gravity="center"
+                            android:visibility="visible">
+
+                        </ImageView>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

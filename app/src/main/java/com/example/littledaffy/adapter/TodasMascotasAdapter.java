@@ -15,16 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littledaffy.MascotaDetalleActivity;
 import com.example.littledaffy.R;
+import com.example.littledaffy.TodasMascotas;
 import com.example.littledaffy.model.MascotaDto;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-
-public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapter.MyViewHolder> {
+public class TodasMascotasAdapter extends RecyclerView.Adapter<TodasMascotasAdapter.MyViewHolder> {
 
     private ArrayList<MascotaDto> data;
+
+    public TodasMascotasAdapter(TodasMascotas todasMascotas) {
+    }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -45,7 +48,7 @@ public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapte
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListaInicialAdapter(Context mainActivity, ArrayList<MascotaDto> myDataset) {
+    public TodasMascotasAdapter(Context todasMascotas, ArrayList<MascotaDto> myDataset) {
         data = myDataset;
     }
 
@@ -53,19 +56,19 @@ public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapte
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TodasMascotasAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // create a new view
 
         CardView v = (CardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_lista_inicial, parent, false);
 
-        MyViewHolder vh = new MyViewHolder(v);
+        TodasMascotasAdapter.MyViewHolder vh = new TodasMascotasAdapter.MyViewHolder(v);
         return vh;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TodasMascotasAdapter.MyViewHolder holder, int position) {
         final MascotaDto currentItem = data.get(position);
 
         holder.nombre.setText(currentItem.getNombre());
@@ -81,7 +84,7 @@ public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapte
                 intent.putExtra("id_mascota", currentItem.getId_mascota());
                 intent.putExtra("ubicacion", currentItem.getUbicacion());
                 holder.context.startActivity(intent);
-           }
+            }
         });
 
         Picasso.get().load(currentItem.getFoto1()).placeholder(R.drawable.a).into(holder.foto, new Callback() {
@@ -101,3 +104,4 @@ public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapte
         return data.size();
     }
 }
+

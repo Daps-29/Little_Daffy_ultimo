@@ -157,7 +157,6 @@
                     android:layout_marginStart="20dp"
                     android:fontFamily="serif"
                     android:text="Pelusa"
-
                     android:textStyle="bold"
                     android:textColor="@android:color/background_dark"
                     android:textSize="30sp" />
@@ -166,10 +165,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:layout_marginRight="15dp">
+                    android:layout_marginRight="30dp">
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/DistanciaUbicacion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -190,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="16dp"
-                android:paddingLeft="13dp">
+                android:paddingLeft="20dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -216,20 +215,20 @@
                 android:layout_marginTop="16dp">
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="serif"
-                    android:text="Raza:"
+                    android:text="Raza"
+                    android:textStyle="bold"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="20sp" />
+                    android:textSize="22sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:layout_marginRight="15dp">
+                    android:layout_marginRight="30dp">
 
                     <TextView
                         android:id="@+id/raza"
@@ -238,9 +237,8 @@
                         android:background="@drawable/ic_cat_bg"
                         android:fontFamily="serif"
                         android:text="Pitbull"
-                        android:gravity="center"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
+                        android:paddingRight="15dp"
+                        android:paddingLeft="15dp"
                         android:textColor="@android:color/white"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -252,7 +250,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="16dp"
-                android:paddingLeft="13dp">
+                android:paddingLeft="20dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -280,7 +278,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="vertical"
-        android:layout_marginBottom="15dp">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/textView7"
@@ -288,7 +286,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="serif"
+            android:textStyle="bold"
             android:text="Publicado por:"
             android:textColor="@android:color/background_dark"
             app:layout_constraintStart_toStartOf="parent" />
@@ -301,7 +301,8 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="bottom"
             android:gravity="bottom"
-            android:paddingLeft="13dp">
+            android:paddingLeft="13dp"
+            android:paddingBottom="15dp">
 
 
             <de.hdodenhof.circleimageview.CircleImageView

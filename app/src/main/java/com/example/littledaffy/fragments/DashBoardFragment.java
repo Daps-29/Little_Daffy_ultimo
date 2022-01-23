@@ -1,5 +1,6 @@
 package com.example.littledaffy.fragments;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,10 +18,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.littledaffy.CategoriasActivity;
+import com.example.littledaffy.EditarUsuarioActivity;
+import com.example.littledaffy.MainActivity;
 import com.example.littledaffy.R;
+import com.example.littledaffy.TodasMascotas;
 import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.adapter.CategoriesAdapter;
 import com.example.littledaffy.adapter.ListaInicialAdapter;
+import com.example.littledaffy.categorias.RecyclerItemClickListener;
 import com.example.littledaffy.model.CategoriasDto;
 import com.example.littledaffy.model.MascotaDto;
 import com.example.littledaffy.model.RegisterHelper;
@@ -49,17 +56,19 @@ public class DashBoardFragment extends Fragment {
 
 
     RecyclerView rv_mascotas;
-    Query userquery;
+    Query query;
     DatabaseReference database,userdatbase;
+    private DatabaseReference databaseReference;
     ListaInicialAdapter listaInicialAdapter;
     ArrayList<MascotaDto> mascotaDtoArrayList;
     RecyclerView.LayoutManager layoutManager;
     FirebaseAuth mAuth;
     ConstraintLayout progress_bar;
     SwipeRefreshLayout swipeRefreshLayout;
-    TextView nombre;
+    TextView nombre, verTodo;
     CircleImageView perfilfoto;
     String idu;
+    LinearLayout listavacia;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
@@ -69,9 +78,8 @@ public class DashBoardFragment extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_dashboard, container, false);
         nombre = root.findViewById(R.id.nombreingreso);
         perfilfoto = root.findViewById(R.id.profile_user);
-
-
-
+        verTodo = root.findViewById(R.id.verTodo);
+        listavacia = root.findViewById(R.id.listavacia);
 
 
         progress_bar = (ConstraintLayout) root.findViewById(R.id.progress_bar);
@@ -98,6 +106,21 @@ public class DashBoardFragment extends Fragment {
 
         categoriesAdapter = new CategoriesAdapter(categoriesAdapterArrayList);
         rv_categorias.setAdapter(categoriesAdapter);
+        rv_categorias.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), rv_categorias, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                CategoriasDto categoriasDto = categoriesAdapterArrayList.get(position);
+                Intent intent = new Intent(getActivity(), CategoriasActivity.class);
+                intent.putExtra("idCategoria", categoriasDto.getId_categoria()+"");
+                intent.putExtra("nombreCategoria", categoriasDto.getNombre_categoria());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
 
 
         //LISTA PRINCIPAL
@@ -107,9 +130,18 @@ public class DashBoardFragment extends Fragment {
         rv_mascotas.setLayoutManager(layoutManager);
         //ACCIONES PARA LA LISTA
         database = FirebaseDatabase.getInstance().getReference("mascotas");
+        query = database.limitToFirst(10);
         mascotaDtoArrayList = new ArrayList<>();
         listaInicialAdapter = new ListaInicialAdapter(getContext(), mascotaDtoArrayList);
         rv_mascotas.setAdapter(listaInicialAdapter);
+
+        verTodo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TodasMascotas.class);
+                startActivity(intent);
+            }
+        });
 
 
         //ACTUALIZAR LISTA
@@ -136,19 +168,23 @@ public class DashBoardFragment extends Fragment {
 
     private void updateMascotasList(){
         progress_bar.setVisibility(View.VISIBLE);
-        database.addValueEventListener(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mascotaDtoArrayList.clear();
+                if (snapshot.exists()){
+                    mascotaDtoArrayList.clear();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        MascotaDto mascotaDto = dataSnapshot.getValue(MascotaDto.class);
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MascotaDto mascotaDto = dataSnapshot.getValue(MascotaDto.class);
+                        if (mascotaDto.getVerificacion() == 1 && mascotaDto.getEstado().equals("1")) {
+                            progress_bar.setVisibility(View.GONE);
+                            mascotaDtoArrayList.add(mascotaDto);
 
-                    if (mascotaDto.getVerificacion() == 1 && mascotaDto.getEstado().equals("1")) {
-                        progress_bar.setVisibility(View.GONE);
-                        mascotaDtoArrayList.add(mascotaDto);
-
+                        }
                     }
+                }else{
+                    progress_bar.setVisibility(View.GONE);
+                    listavacia.setVisibility(View.VISIBLE);
                 }
 
                 listaInicialAdapter.notifyDataSetChanged();
