@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.littledaffy.NuevaMacotaActivity;
+import com.example.littledaffy.MascotaNuevaActivity;
 import com.example.littledaffy.R;
 import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.adapter.MascotasAdapter;
@@ -50,7 +50,7 @@ public class MisMascotasFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MisMascotasFragment.this.getContext(), NuevaMacotaActivity.class));
+                startActivity(new Intent(MisMascotasFragment.this.getContext(), MascotaNuevaActivity.class));
             }
         });
         database = FirebaseDatabase.getInstance().getReference("mascotas");

@@ -79,7 +79,7 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
         Intent intent = getIntent();
 
         organizacionId = intent.getStringExtra("id_organizacion");
-        iddireccion = intent.getStringExtra("direccion");
+//        iddireccion = intent.getStringExtra("direccion");
         organizacionInfo = FirebaseDatabase.getInstance().getReference("organizaciones").child(organizacionId);
 
 
@@ -160,69 +160,53 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        FirebaseDatabase.getInstance().getReference("direcciones").child(iddireccion)
+        FirebaseDatabase.getInstance().getReference("organizaciones").child(organizacionId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             mMap = googleMap;
-                            DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
                             //VALIDAMOS Y RECUPERAMOS UBICACION
-                            latitude = Double.valueOf(direccionDto.getLatitud());
-                            longitude = Double.valueOf(direccionDto.getLongitud());
-
-                            FirebaseDatabase.getInstance().getReference("organizaciones").child(direccionDto.getIduser())
-                                    .addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            if (dataSnapshot.exists()) {
-                                                mMap = googleMap;
-                                                mMap.getUiSettings().setMapToolbarEnabled(false);
-                                                mMap.getUiSettings();
-                                                OrganizacionDto organizacionDto = dataSnapshot.getValue(OrganizacionDto.class);
-                                                nombreOrganizacion.setText(organizacionDto.getNombre());
-                                                nombremarcador = organizacionDto.getNombre();
-                                                //Agrega marcador de la ubicacion actual en el mapa
-                                                if(latitude != null && longitude != null){
-                                                    verGoogleMapsOrganizacion.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            if(!latitude.equals("") || !longitude.equals("")){
-                                                                try {
-                                                                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                                                                            Uri.parse("geo:0,0?q="+ latitude +","+ longitude +" (Organizacion: " + nombreOrganizacion.getText().toString() + ")"));
-                                                                    startActivity(intent);
-                                                                }catch (Exception e){
-                                                                    Toast.makeText(getApplicationContext(), "Contacta con la organizacion para saber su ubicacion exacta", Toast.LENGTH_LONG).show();
-                                                                }
-
-                                                            }else{
-                                                                Toast.makeText(getApplicationContext(),"La organizacion no especificó su dirección exacta.", Toast.LENGTH_LONG).show();
-                                                            }
-                                                        }
-                                                    });
-
-
-                                                    LatLng ubicacionActual = new LatLng(latitude, longitude);
-                                                    mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource
-                                                            (R.drawable.ic_marcador)).anchor(0.0f , 1.0f).position(ubicacionActual).title(nombremarcador));
-                                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacionActual, 15));
-
-                                                }else{
-                                                    latitude = -16.5435752;
-                                                    longitude = -68.0591915;
-                                                    LatLng ubicacionLaPaz = new LatLng(latitude, longitude);
-                                                    mMap.addMarker(new MarkerOptions().position(ubicacionLaPaz).title("Ubicación de la organizacion no registrada"));
-                                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacionLaPaz, 15));
-                                                }
+                            OrganizacionDto organizacionDto = dataSnapshot.getValue(OrganizacionDto.class);
+                            latitude = Double.valueOf(organizacionDto.getLatitud());
+                            longitude = Double.valueOf(organizacionDto.getLongitud());
+                            mMap = googleMap;
+                            mMap.getUiSettings().setMapToolbarEnabled(false);
+                            mMap.getUiSettings();
+                            nombreOrganizacion.setText(organizacionDto.getNombre());
+                            nombremarcador = organizacionDto.getNombre();
+                            //Agrega marcador de la ubicacion actual en el mapa
+                            if(latitude != null && longitude != null){
+                                verGoogleMapsOrganizacion.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        if(!latitude.equals("") || !longitude.equals("")){
+                                            try {
+                                                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                                        Uri.parse("geo:0,0?q="+ latitude +","+ longitude +" (Organizacion: " + nombreOrganizacion.getText().toString() + ")"));
+                                                startActivity(intent);
+                                            }catch (Exception e){
+                                                Toast.makeText(getApplicationContext(), "Contacta con la organizacion para saber su ubicacion exacta", Toast.LENGTH_LONG).show();
                                             }
-                                        }
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                        }else{
+                                            Toast.makeText(getApplicationContext(),"La organizacion no especificó su dirección exacta.", Toast.LENGTH_LONG).show();
                                         }
-                                    });
+                                    }
+                                });
+                                //MARCAMOS EN EL MAPA LA UBICACION RECUPERADA
+                                LatLng ubicacionActual = new LatLng(latitude, longitude);
+                                mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource
+                                        (R.drawable.ic_marcador)).anchor(0.0f , 1.0f).position(ubicacionActual).title(nombremarcador));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacionActual, 15));
+
+                            }else{
+                                latitude = -16.5435752;
+                                longitude = -68.0591915;
+                                LatLng ubicacionLaPaz = new LatLng(latitude, longitude);
+                                mMap.addMarker(new MarkerOptions().position(ubicacionLaPaz).title("Ubicación de la organizacion no registrada"));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacionLaPaz, 15));
+                            }
                         }
                     }
 

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.littledaffy.MascotaDetalleActivity;
 import com.example.littledaffy.R;
 import com.example.littledaffy.VerOrganizacionesActivity;
 import com.example.littledaffy.model.MascotaDto;
@@ -74,9 +75,10 @@ public class LogrosAdapter extends RecyclerView.Adapter<LogrosAdapter.MyViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(holder.context.getApplicationContext(), VerOrganizacionesActivity.class);
-                intent.putExtra("id_mascota", currentItem.getId_mascota());
+                Intent intent = new Intent(holder.context.getApplicationContext(), MascotaDetalleActivity.class);
                 intent.putExtra("user", currentItem.getUser());
+                intent.putExtra("id_mascota", currentItem.getId_mascota());
+                intent.putExtra("ubicacion", currentItem.getUbicacion());
                 holder.context.startActivity(intent);
             }
         });
