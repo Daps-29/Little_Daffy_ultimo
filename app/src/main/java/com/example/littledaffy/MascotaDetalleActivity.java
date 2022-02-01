@@ -49,6 +49,8 @@ public class MascotaDetalleActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     SliderLayout sliderLayout;
     String telf, id;
+    String estadomasco;
+    String estadomasco1;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
@@ -64,7 +66,6 @@ public class MascotaDetalleActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.verde), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
-
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -90,7 +91,6 @@ public class MascotaDetalleActivity extends AppCompatActivity {
         sliderLayout.setScrollTimeInSec(5);
 
 
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,8 +113,8 @@ public class MascotaDetalleActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
 
-                nombreuser.setText(registerHelper.getNombres()+" "+registerHelper.getApellidos());
-                telf = registerHelper.getTelefono()+"";
+                nombreuser.setText(registerHelper.getNombres() + " " + registerHelper.getApellidos());
+                telf = registerHelper.getTelefono() + "";
                 Picasso.get().load(registerHelper.getFoto()).placeholder(R.drawable.a).into(imag, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -132,7 +132,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()){
+                                if (dataSnapshot.exists()) {
                                     DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
                                     Location ubicacionMascota = new Location("Ubicacion mascota");
                                     ubicacionMascota.setLatitude(Double.parseDouble(direccionDto.getLatitud()));
@@ -143,29 +143,30 @@ public class MascotaDetalleActivity extends AppCompatActivity {
                                             .addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    if(dataSnapshot.exists()){
+                                                    if (dataSnapshot.exists()) {
                                                         RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
                                                         FirebaseDatabase.getInstance().getReference("direcciones")
                                                                 .child(registerHelper.getDireccion())
                                                                 .addListenerForSingleValueEvent(new ValueEventListener() {
                                                                     @Override
                                                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                        if (dataSnapshot.exists()){
+                                                                        if (dataSnapshot.exists()) {
                                                                             DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
                                                                             Location ubicacionUsuario = new Location("Ubicacion Usuario");
                                                                             ubicacionUsuario.setLatitude(Double.parseDouble(direccionDto.getLatitud()));
                                                                             ubicacionUsuario.setLongitude(Double.parseDouble(direccionDto.getLongitud()));
 
-                                                                            if (direccionDto.getLongitud() == null || direccionDto.getLatitud() == null){
+                                                                            if (direccionDto.getLongitud() == null || direccionDto.getLatitud() == null) {
                                                                                 return;
                                                                             }
                                                                             float distance = ubicacionMascota.distanceTo(ubicacionUsuario);
-                                                                            double distancia = distance/1000;
-                                                                            distancia =  Math.round(distancia * 100.0)/100.0;
+                                                                            double distancia = distance / 1000;
+                                                                            distancia = Math.round(distancia * 100.0) / 100.0;
                                                                             DistanciaUbicacion.setText(String.valueOf(distancia) + " Km");
 
                                                                         }
                                                                     }
+
                                                                     @Override
                                                                     public void onCancelled(@NonNull DatabaseError databaseError) {
                                                                     }
@@ -173,6 +174,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
 
                                                     }
                                                 }
+
                                                 @Override
                                                 public void onCancelled(@NonNull DatabaseError databaseError) {
                                                 }
@@ -180,6 +182,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
 
                                 }
                             }
+
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                             }
@@ -192,26 +195,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
 
             }
         });
-        //BOTON WHATSAPP
-        whatsapp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String telefono = telf;
-                if (telefono.substring(0, 3).equals("591")) {
-                    telefono = telefono.substring(3);
-                }
 
-                if (telefono.substring(0, 4).equals("+591")) {
-                    telefono = telefono.substring(4);
-                }
-
-                String mensaje = "Somos el equipo de little daffy: ";
-                String url = "https://wa.me/591" + telefono + "?text=" + mensaje;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
 
         mascotainfo.addValueEventListener(new ValueEventListener() {
             @Override
@@ -224,10 +208,17 @@ public class MascotaDetalleActivity extends AppCompatActivity {
                 estado.setText(mascotaDto.getSexo());
                 raza.setText(mascotaDto.getRaza());
                 vacuna.setText(mascotaDto.getVacuna());
-
-                for (int i = 0; i<3; i++){
+                estadomasco = mascotaDto.getEstadoperdida();
+                estadomasco1 = mascotaDto.getEstado();
+                if (estadomasco.equals("Desaparecido") || estadomasco.equals("Adopción")) {
+                    whatsapp.setVisibility(View.VISIBLE);
+                }
+                if (estadomasco1.equals("Encontrado") || estadomasco1.equals("Adoptado")){
+                    whatsapp.setVisibility(View.INVISIBLE);
+                }
+                for (int i = 0; i < 3; i++) {
                     DefaultSliderView sliderView = new DefaultSliderView(MascotaDetalleActivity.this);
-                    switch (i){
+                    switch (i) {
                         case 0:
                             sliderView.setImageUrl(mascotaDto.getFoto1());
                             break;
@@ -249,6 +240,34 @@ public class MascotaDetalleActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        //BOTON WHATSAPP
+        whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String telefono = telf;
+                if (telefono.substring(0, 3).equals("591")) {
+                    telefono = telefono.substring(3);
+                }
+
+                if (telefono.substring(0, 4).equals("+591")) {
+                    telefono = telefono.substring(4);
+                }
+                if (estadomasco.equals("Desaparecido")){
+                String mensaje = "Encontre a tu mascota: ";
+                String url = "https://wa.me/591" + telefono + "?text=" + mensaje;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                }
+                if (estadomasco.equals("Adopción")){
+                    String mensaje = "Quiero adoptar a esa mascota: ";
+                    String url = "https://wa.me/591" + telefono + "?text=" + mensaje;
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }
             }
         });
 

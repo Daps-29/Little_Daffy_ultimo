@@ -14,7 +14,10 @@
         android:layout_height="wrap_content"
         android:background="#fff"
         app:theme="@style/ToolBarStyle"
-        app:titleTextColor="@color/fondo"/>
+        app:titleTextColor="@color/fondo">
+
+    </androidx.appcompat.widget.Toolbar>
+
 
     <FrameLayout
         android:id="@+id/container"

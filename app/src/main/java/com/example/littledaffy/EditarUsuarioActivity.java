@@ -33,8 +33,8 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditarUsuarioActivity extends AppCompatActivity {
-    EditText telefono,direccion;
-    TextView nombre,correo,cambio;
+    EditText telefono;
+    TextView nombre,correo,cambio,direccion;
     Spinner genero;
     CircleImageView perfil;
     String id;
@@ -58,6 +58,13 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         perfil = findViewById(R.id.fotoperfil);
         editar = findViewById(R.id.editarperfil);
         cambio = findViewById(R.id.cambio);
+
+        direccion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(EditarUsuarioActivity.this, UbicacionActivity.class));
+            }
+        });
         cambio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,11 +81,9 @@ public class EditarUsuarioActivity extends AppCompatActivity {
                 //startActivity(new Intent(MyProfileFragment.this.getContext(), EditarUsuarioActivity.class));
                 DatabaseReference base = FirebaseDatabase.getInstance().getReference("usuarios");
                 String telef = telefono.getText().toString();
-                String direc = direccion.getText().toString();
                 String gen = genero.getSelectedItem().toString();
                 Map<String,Object> update = new HashMap<>();
                 update.put("telefono",telef);
-                update.put("direccion",direc);
                 update.put("sexo",gen);
                 base.child(id).updateChildren(update);
                 progressDialog = new ProgressDialog(EditarUsuarioActivity.this);
@@ -102,7 +107,6 @@ public class EditarUsuarioActivity extends AppCompatActivity {
                 nombre.setText(name+" "+registerHelper.getApellidos());
                 correo.setText(registerHelper.getCorreo());
                 telefono.setText(registerHelper.getTelefono());
-                direccion.setText(registerHelper.getDireccion());
                 //genero.setText(registerHelper.getSexo());
                 Picasso.get().load(registerHelper.getFoto()).placeholder(R.drawable.a).into(perfil, new Callback() {
                     @Override

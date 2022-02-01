@@ -61,6 +61,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/edit_color"
                     android:paddingLeft="20dp"
+                    android:hint="Ejemplo: Pelusa"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp" />
                 <TextView
@@ -77,6 +78,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/edit_color"
                     android:paddingLeft="20dp"
+                    android:hint="Ejemplo: Tiene pelaje negro"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp" />
                 <TextView
@@ -93,6 +95,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/edit_color"
                     android:paddingLeft="20dp"
+                    android:hint="Ejemplo: Sopocachi"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp" />
 
@@ -200,7 +203,7 @@
                         android:layout_marginTop="20dp"
                         android:gravity="center"
                         android:inputType="number"
-                        android:hint="10"
+                        android:hint="Ejemplo: 5"
                         android:textSize="18dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/fecha" />
@@ -257,6 +260,7 @@
                     android:id="@+id/raza"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:hint="Ejemplo: Bulldog"
                     android:background="@drawable/edit_color"
                     android:paddingLeft="20dp"
                     android:paddingTop="10dp"
@@ -275,6 +279,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/edit_color"
                     android:paddingLeft="20dp"
+                    android:hint="Ejemplo: Vacuna contra la rabia"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp" />
             </LinearLayout>

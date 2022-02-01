@@ -69,6 +69,8 @@ public class MascotaNuevaActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST2 = 2;
     private static final int PICK_IMAGE_REQUEST3 = 3;
     private static final int STORAGE_PERMISION_CODE = 1;
+    private static final int STORAGE_PERMISION_CODE2 = 2;
+    private static final int STORAGE_PERMISION_CODE3 = 3;
     Button guardarmascota;
     ImageView imagen1,imagen2,imagen3;
     Uri foto1,foto2,foto3;
@@ -115,7 +117,7 @@ public class MascotaNuevaActivity extends AppCompatActivity {
         mostrarfecha = findViewById(R.id.mostrarfecha);
 
 
-        String[]Estado={"Adpción","Desaparecido"};
+        String[]Estado={"Adopción","Desaparecido"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Estado);
         estado.setAdapter(adapter);
 
@@ -173,13 +175,23 @@ public class MascotaNuevaActivity extends AppCompatActivity {
         imagen2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                abririmagen2();
+                if (ContextCompat.checkSelfPermission(MascotaNuevaActivity.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
+                    abririmagen2();
+                }else{
+                    permisos2();
+                }
             }
         });
         imagen3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                abririmagen3();
+                if (ContextCompat.checkSelfPermission(MascotaNuevaActivity.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
+                    abririmagen3();
+                }else{
+                    permisos3();
+                }
             }
         });
 
@@ -458,6 +470,42 @@ public class MascotaNuevaActivity extends AppCompatActivity {
         }
 
     }
+    public void permisos2(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
+            new AlertDialog.Builder(this).setTitle("Permiso denegado").setMessage("El permiso a galeria fue denegado").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    ActivityCompat.requestPermissions(MascotaNuevaActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISION_CODE2);
+                }
+            }).setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialog.dismiss();
+                }
+            }).create().show();
+        }else{
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISION_CODE2);
+        }
+
+    }
+    public void permisos3(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
+            new AlertDialog.Builder(this).setTitle("Permiso denegado").setMessage("El permiso a galeria fue denegado").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    ActivityCompat.requestPermissions(MascotaNuevaActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISION_CODE3);
+                }
+            }).setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialog.dismiss();
+                }
+            }).create().show();
+        }else{
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISION_CODE3);
+        }
+
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -465,6 +513,22 @@ public class MascotaNuevaActivity extends AppCompatActivity {
             if (grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(MascotaNuevaActivity.this, "Permiso Concedido", Toast.LENGTH_SHORT).show();
                 abririmagen1();
+            }else{
+                Toast.makeText(MascotaNuevaActivity.this, "Permiso Denegado", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (requestCode == STORAGE_PERMISION_CODE2){
+            if (grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(MascotaNuevaActivity.this, "Permiso Concedido", Toast.LENGTH_SHORT).show();
+                abririmagen2();
+            }else{
+                Toast.makeText(MascotaNuevaActivity.this, "Permiso Denegado", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (requestCode == STORAGE_PERMISION_CODE3){
+            if (grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(MascotaNuevaActivity.this, "Permiso Concedido", Toast.LENGTH_SHORT).show();
+                abririmagen3();
             }else{
                 Toast.makeText(MascotaNuevaActivity.this, "Permiso Denegado", Toast.LENGTH_SHORT).show();
             }

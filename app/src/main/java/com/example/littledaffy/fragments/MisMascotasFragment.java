@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 
 public class MisMascotasFragment extends Fragment {
     RecyclerView cardMasco;
+    TextView sin;
     DatabaseReference database;
     MascotasAdapter mascotasAdapter;
     FloatingActionButton btn;
@@ -44,6 +46,7 @@ public class MisMascotasFragment extends Fragment {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         cardMasco = root.findViewById(R.id.recicle);
+        sin = root.findViewById(R.id.sin);
         btn = (FloatingActionButton)root.findViewById(R.id.nuevamascota);
         btn = (FloatingActionButton) root.findViewById(R.id.nuevamascota);
 
@@ -71,6 +74,7 @@ public class MisMascotasFragment extends Fragment {
                     String idu = usr.getUid();
                     if (usermascota.equals(idu) && mascotaDto.getVerificacion() == 1 && mascotaDto.getEstado().equals("1")) {
                         list.add(mascotaDto);
+                        sin.setVisibility(View.INVISIBLE);
                     }
                 }
 

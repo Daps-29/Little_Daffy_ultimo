@@ -86,7 +86,7 @@ public class DashBoardFragment extends Fragment {
 
         //CATEGORIAS MASCOTAS
         rv_categorias = (RecyclerView) root.findViewById(R.id.rv_categorias);
-        rv_categorias.setHasFixedSize(true);
+        //rv_categorias.setHasFixedSize(true);
         categories_layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rv_categorias.setLayoutManager(categories_layoutManager);
 
@@ -125,12 +125,12 @@ public class DashBoardFragment extends Fragment {
 
         //LISTA PRINCIPAL
         rv_mascotas = (RecyclerView) root.findViewById(R.id.rv_mascotas);
-        rv_mascotas.setHasFixedSize(true);
+        //rv_mascotas.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rv_mascotas.setLayoutManager(layoutManager);
         //ACCIONES PARA LA LISTA
         database = FirebaseDatabase.getInstance().getReference("mascotas");
-        query = database.limitToFirst(10);
+        query = database.orderByKey().limitToLast(10);
         mascotaDtoArrayList = new ArrayList<>();
         listaInicialAdapter = new ListaInicialAdapter(getContext(), mascotaDtoArrayList);
         rv_mascotas.setAdapter(listaInicialAdapter);

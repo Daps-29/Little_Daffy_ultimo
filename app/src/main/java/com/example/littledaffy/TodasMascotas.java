@@ -68,7 +68,7 @@ public class TodasMascotas extends AppCompatActivity {
 
         //CATEGORIAS MASCOTAS
         rv_categorias = (RecyclerView) findViewById(R.id.rv_categorias);
-        rv_categorias.setHasFixedSize(true);
+        //rv_categorias.setHasFixedSize(true);
         categories_layoutManager = new LinearLayoutManager(TodasMascotas.this, LinearLayoutManager.HORIZONTAL, false);
         rv_categorias.setLayoutManager(categories_layoutManager);
 
@@ -108,7 +108,7 @@ public class TodasMascotas extends AppCompatActivity {
 
         //LISTA PRINCIPAL
         rv_mascotas = (RecyclerView) findViewById(R.id.rv_mascotas);
-        rv_mascotas.setHasFixedSize(true);
+        //rv_mascotas.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(TodasMascotas.this, LinearLayoutManager.VERTICAL, false);
         rv_mascotas.setLayoutManager(layoutManager);
         //ACCIONES PARA LA LISTA

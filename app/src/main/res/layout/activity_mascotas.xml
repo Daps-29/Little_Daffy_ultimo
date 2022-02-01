@@ -10,11 +10,11 @@
     android:layout_height="match_parent"
     >
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recicle"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/nuevamascota"
@@ -31,6 +31,15 @@
         android:layout_marginBottom="32dp"
         android:backgroundTint="@color/white"
         android:src="@android:drawable/ic_input_add" />
+
+   <TextView
+       android:id="@+id/sin"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Aun no tienes publicaciones"
+       android:textSize="25dp"
+       android:gravity="center"
+       android:paddingTop="300dp"/>
 
 </RelativeLayout>
 
