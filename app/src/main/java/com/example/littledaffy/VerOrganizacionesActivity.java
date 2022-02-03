@@ -49,7 +49,7 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
     Double latitude, longitude;
     String nombremarcador, iddireccion;
     FloatingActionButton whatsapp;
-    String celOrga;
+    String celOrga, nombreOrga;
 
     private GoogleMap mMap;
     FloatingActionButton verGoogleMapsOrganizacion;
@@ -101,9 +101,10 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
                 OrganizacionDto organizacionDto = dataSnapshot.getValue(OrganizacionDto.class);
                 nombreOrganizacion.setText(organizacionDto.getNombre());
                 descripcionOrganizacion.setText(organizacionDto.getDescripcion());
-                horario.setText(organizacionDto.getHoraen() + " " + organizacionDto.getHorafin());
+                horario.setText(organizacionDto.getHoraen() + " - " + organizacionDto.getHorafin());
                 direccionLiteral.setText(organizacionDto.getDireccion_literal());
                 celOrga = organizacionDto.getContacto()+"";
+                nombreOrga = organizacionDto.getNombre();
                 Picasso.get().load(organizacionDto.getFoto()).placeholder(R.drawable.a).into(profile_image, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -147,7 +148,7 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
                     celOrganizacion = celOrganizacion.substring(4);
                 }
 
-                String mensaje = "Buenas!Soy repartidor de la App Ayni Chef, tengo la siguiente duda: ";
+                String mensaje = "Hola, queria mas información sobre" + nombreOrga + " ";
                 String url = "https://wa.me/591" + celOrganizacion + "?text=" + mensaje;
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));

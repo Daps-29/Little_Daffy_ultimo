@@ -103,5 +103,10 @@ public class TodasMascotasAdapter extends RecyclerView.Adapter<TodasMascotasAdap
     public int getItemCount() {
         return data.size();
     }
+
+    public void filterList(ArrayList<MascotaDto> filteredList){
+        data = filteredList;
+        notifyDataSetChanged();
+    }
 }
 

@@ -2,6 +2,7 @@ package com.example.littledaffy;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +34,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -53,6 +55,7 @@ public class TodasMascotas extends AppCompatActivity {
     ConstraintLayout progress_bar;
     SwipeRefreshLayout swipeRefreshLayout;
     LinearLayout listavacia;
+    SearchView searchView;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
@@ -63,6 +66,8 @@ public class TodasMascotas extends AppCompatActivity {
 
         progress_bar = (ConstraintLayout) findViewById(R.id.progress_bar);
         listavacia = (LinearLayout) findViewById(R.id.listavacia);
+        searchView = (SearchView) findViewById(R.id.search_mascota);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_back);
@@ -118,6 +123,20 @@ public class TodasMascotas extends AppCompatActivity {
         todasMascotasAdapter = new TodasMascotasAdapter(TodasMascotas.this, mascotaDtoArrayList);
         rv_mascotas.setAdapter(todasMascotasAdapter);
 
+        //BUSACADOR
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return true;
+            }
+        });
+
 
         //ACTUALIZAR LISTA
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
@@ -131,12 +150,21 @@ public class TodasMascotas extends AppCompatActivity {
         updateMascotasList();
     }
 
+    private void filter(String newText) {
+        ArrayList<MascotaDto> filteredList = new ArrayList<>();
+        for (MascotaDto item : mascotaDtoArrayList){
+            if (item.getNombre().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        todasMascotasAdapter.filterList(filteredList);
+    }
+
     private void updateList(){
         updateMascotasList();
         swipeRefreshLayout.setRefreshing(false);
     }
-
-
+    
     private void updateMascotasList(){
         progress_bar.setVisibility(View.VISIBLE);
         database.addValueEventListener(new ValueEventListener() {
