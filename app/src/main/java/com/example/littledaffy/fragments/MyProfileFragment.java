@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.example.littledaffy.EditarUsuarioActivity;
 import com.example.littledaffy.R;
 import com.example.littledaffy.Utility.NetworkChangeListener;
+import com.example.littledaffy.model.DireccionDto;
 import com.example.littledaffy.model.RegisterHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -74,7 +75,6 @@ public class MyProfileFragment extends Fragment {
                 nombre.setText(name+" "+registerHelper.getApellidos());
                 correo.setText(registerHelper.getCorreo());
                 telefono.setText(registerHelper.getTelefono());
-                direccion.setText(registerHelper.getDireccion());
                 genero.setText(registerHelper.getSexo());
                 Picasso.get().load(registerHelper.getFoto()).placeholder(R.drawable.a).into(perfil, new Callback() {
                     @Override
@@ -85,6 +85,19 @@ public class MyProfileFragment extends Fragment {
                     @Override
                     public void onError(Exception e) {
                         Log.e("PICASSO ERROR", "onError: " + e);
+                    }
+                });
+
+                FirebaseDatabase.getInstance().getReference("direcciones").child(registerHelper.getDireccion()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        DireccionDto direccionDto = snapshot.getValue(DireccionDto. class);
+                        direccion.setText(direccionDto.getDireccionLiteral() + ", " + direccionDto.getCalle());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
 

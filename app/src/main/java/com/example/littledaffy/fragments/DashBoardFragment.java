@@ -91,18 +91,16 @@ public class DashBoardFragment extends Fragment {
         rv_categorias.setLayoutManager(categories_layoutManager);
 
         categoriesAdapterArrayList = new ArrayList<>();
-        CategoriasDto categoria1 = new CategoriasDto(0,"Gatos", getResources().getDrawable(R.drawable.cate));
-        CategoriasDto categoria2 = new CategoriasDto(1,"Perros", getResources().getDrawable(R.drawable.cate2));
-        CategoriasDto categoria3 = new CategoriasDto(2,"Conejos", getResources().getDrawable(R.drawable.cate));
-        CategoriasDto categoria4 = new CategoriasDto(3,"Aves", getResources().getDrawable(R.drawable.cate));
-        CategoriasDto categoria5 = new CategoriasDto(4,"Hamsters", getResources().getDrawable(R.drawable.cate));
-        CategoriasDto categoria6 = new CategoriasDto(5,"Otros", getResources().getDrawable(R.drawable.cate));
+        CategoriasDto categoria1 = new CategoriasDto(0,"Gatos", getResources().getDrawable(R.drawable.gato));
+        CategoriasDto categoria2 = new CategoriasDto(1,"Perros", getResources().getDrawable(R.drawable.perro));
+        CategoriasDto categoria3 = new CategoriasDto(2,"Conejos", getResources().getDrawable(R.drawable.conejo));
+        CategoriasDto categoria4 = new CategoriasDto(3,"Aves", getResources().getDrawable(R.drawable.ave));
+        CategoriasDto categoria5 = new CategoriasDto(4,"Hamsters", getResources().getDrawable(R.drawable.hamster));
         categoriesAdapterArrayList.add(categoria1);
         categoriesAdapterArrayList.add(categoria2);
         categoriesAdapterArrayList.add(categoria3);
         categoriesAdapterArrayList.add(categoria4);
         categoriesAdapterArrayList.add(categoria5);
-        categoriesAdapterArrayList.add(categoria6 );
 
         categoriesAdapter = new CategoriesAdapter(categoriesAdapterArrayList);
         rv_categorias.setAdapter(categoriesAdapter);
@@ -178,13 +176,14 @@ public class DashBoardFragment extends Fragment {
 
                         if (mascotaDto.getVerificacion() == 1 && mascotaDto.getEstado().equals("1")) {
                             progress_bar.setVisibility(View.GONE);
+                            listavacia.setVisibility(View.GONE);
                             mascotaDtoArrayList.add(mascotaDto);
-
                         }
                     }
-                }else{
-                    progress_bar.setVisibility(View.GONE);
-                    listavacia.setVisibility(View.VISIBLE);
+                    if (mascotaDtoArrayList.size() == 0){
+                        progress_bar.setVisibility(View.GONE);
+                        listavacia.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 listaInicialAdapter.notifyDataSetChanged();

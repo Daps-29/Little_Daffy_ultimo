@@ -15,7 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.littledaffy.MascotaDetalleActivity;
 import com.example.littledaffy.R;
+import com.example.littledaffy.model.DireccionDto;
 import com.example.littledaffy.model.MascotaDto;
+import com.example.littledaffy.model.OrganizacionDto;
+import com.example.littledaffy.model.RegisterHelper;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -71,7 +78,33 @@ public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapte
         holder.nombre.setText(currentItem.getNombre());
         holder.estado.setText(currentItem.getEstadoperdida());
         holder.edad.setText(currentItem.getEdad()+" "+ currentItem.getTiempo());
-        holder.ubicacion.setText(currentItem.getUbicacion());
+
+
+        FirebaseDatabase.getInstance().getReference("usuarios").child(currentItem.getUser()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
+                if(registerHelper.getDireccion() != null && registerHelper.getDireccion() != ""){
+                    FirebaseDatabase.getInstance().getReference("direcciones").child(registerHelper.getDireccion()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
+                            holder.ubicacion.setText(direccionDto.getDireccionLiteral());
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

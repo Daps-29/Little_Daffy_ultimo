@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Hola"
+                    android:text="Hola,"
                     android:textSize="25sp"
                     android:textColor="@color/plomo"
                     android:layout_marginLeft="10dp" />
@@ -45,12 +45,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Mariano Garcia !!"
+                    android:text=" "
                     android:textSize="25sp"
                     android:maxLines="1"
                     android:textStyle="bold"
                     android:textColor="@color/plomo"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="5dp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -61,7 +61,8 @@
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:visibility="gone">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_mascota"
@@ -181,6 +182,7 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -190,8 +192,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="40dp"
-                            android:text="Aún no se encontraron publicaciones"
+                            android:layout_marginTop="80dp"
+                            android:text="Aún no se encontraron publicaciones :c"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:padding="5dp"

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ public class CategoriasActivity extends AppCompatActivity {
     ArrayList<MascotaDto> mascotaDtoArrayList;
     ImageView toolbarImage;
     ListaInicialAdapter listaInicialAdapter;
+    LinearLayout listavacia;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,29 +66,27 @@ public class CategoriasActivity extends AppCompatActivity {
         Intent intent = getIntent();
         idCategoria = intent.getStringExtra("idCategoria");
         nombreCategoria = intent.getStringExtra("nombreCategoria");
+        listavacia = findViewById(R.id.listavacia);
 
         toolbarImage = (ImageView) findViewById(R.id.toolbarImage);
         switch (idCategoria){
             case "0":
-                toolbarImage.setImageResource(R.drawable.cate);
+                toolbarImage.setImageResource(R.drawable.gato);
                 break;
             case "1":
-                toolbarImage.setImageResource(R.drawable.cate);
+                toolbarImage.setImageResource(R.drawable.perro);
                 break;
             case "2":
-                toolbarImage.setImageResource(R.drawable.cate);
+                toolbarImage.setImageResource(R.drawable.conejo);
                 break;
             case "3":
-                toolbarImage.setImageResource(R.drawable.cate);
+                toolbarImage.setImageResource(R.drawable.ave);
                 break;
             case "4":
-                toolbarImage.setImageResource(R.drawable.cate);
-                break;
-            case "5":
-                toolbarImage.setImageResource(R.drawable.cate);
+                toolbarImage.setImageResource(R.drawable.hamster);
                 break;
             default:
-                toolbarImage.setImageResource(R.drawable.cate);
+                toolbarImage.setImageResource(R.drawable.perro);
                 break;
         }
 
@@ -110,12 +110,20 @@ public class CategoriasActivity extends AppCompatActivity {
         counterRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    MascotaDto mascotaDto = postSnapshot.getValue(MascotaDto.class);
-                    String categoria = mascotaDto.getCategorias();
-                    if (categoria.equals(nombreCategoria)) {
-                        mascotaDtoArrayList.add(mascotaDto);
-                        listaInicialAdapter.notifyDataSetChanged();
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        MascotaDto mascotaDto = postSnapshot.getValue(MascotaDto.class);
+                        String categoria = mascotaDto.getCategorias();
+                        if (categoria.equals(nombreCategoria)) {
+                            if (mascotaDto.getVerificacion() == 1 && mascotaDto.getEstado().equals("1")) {
+                                listavacia.setVisibility(View.GONE);
+                                mascotaDtoArrayList.add(mascotaDto);
+                                listaInicialAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                    if (mascotaDtoArrayList.size() == 0){
+                        listavacia.setVisibility(View.VISIBLE);
                     }
                 }
                 listaInicialAdapter.notifyDataSetChanged();

@@ -1,5 +1,6 @@
 package com.example.littledaffy;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.littledaffy.model.DireccionDto;
+import com.example.littledaffy.model.OrganizacionDto;
+import com.example.littledaffy.model.RegisterHelper;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,8 +31,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.api.Http;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import java.io.IOException;
@@ -47,6 +53,7 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
     private FirebaseAuth mAuth;
     String id;
     Button btnguardarubicacion;
+    String nombrecalle, ciudad, idusuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,8 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
         mapFragment.getMapAsync(this);
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        idusuario = user.getUid();
 
         btnguardarubicacion = (Button) findViewById(R.id.btnguardarubicacion);
 
@@ -105,12 +114,12 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
                             List<Address> list = geocoder.getFromLocation(
                                     latitud, longitud, 1);
                             if (!list.isEmpty()) {
-                                String nombrecalle = list.get(0).getFeatureName();
-                                String ciudad = list.get(0).getLocality();
+                                nombrecalle = list.get(0).getFeatureName();
+                                ciudad = list.get(0).getLocality();
                                 String Estado = list.get(0).getAdminArea();
                                 String country = list.get(0).getCountryName();
 
-                                Toast.makeText(UbicacionActivity.this, "Direc: " + Estado, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(UbicacionActivity.this, "Direc: " + Estado, Toast.LENGTH_SHORT).show();
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -120,22 +129,48 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
                     btnguardarubicacion.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String idDireccion = databaseReference.push().getKey();
-                            String calle = "";
-                            String referencia = "";
-                            String iduser = id;
-                            String direccionLiteral = "";
-                            DireccionDto direccionDto = new DireccionDto(idDireccion, calle, referencia, iduser, latitud.toString(), longitud.toString(), direccionLiteral);
-                            databaseReference.child("").child(idDireccion).setValue(direccionDto);
-                            Toast.makeText(UbicacionActivity.this, "Direccion agregada correctamente", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(UbicacionActivity.this, MainActivity.class));
+                            FirebaseDatabase.getInstance().getReference("usuarios").child(idusuario).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
+                                    if (registerHelper.getDireccion() == null && registerHelper.getDireccion() == ""){
+                                        String idDireccion = databaseReference.push().getKey();
+                                        String calle = nombrecalle;
+                                        String referencia = "";
+                                        String iduser = idusuario;
+                                        String direccionLiteral = ciudad;
+                                        DireccionDto direccionDto = new DireccionDto(idDireccion, calle, referencia, iduser, latitud.toString(), longitud.toString(), direccionLiteral);
+                                        databaseReference.child("").child(idDireccion).setValue(direccionDto);
+                                        Toast.makeText(UbicacionActivity.this, "Dirección agregada correctamente", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(UbicacionActivity.this, MainActivity.class));
 
-                            DatabaseReference base = FirebaseDatabase.getInstance().getReference("usuarios");
-                            FirebaseUser urs = mAuth.getCurrentUser();
-                            id = urs.getUid();
-                            Map<String,Object> update = new HashMap<>();
-                            update.put("direccion",idDireccion);
-                            base.child(id).updateChildren(update);
+                                        DatabaseReference base = FirebaseDatabase.getInstance().getReference("usuarios");
+                                        FirebaseUser urs = mAuth.getCurrentUser();
+                                        id = urs.getUid();
+                                        Map<String,Object> update = new HashMap<>();
+                                        update.put("direccion",idDireccion);
+                                        base.child(id).updateChildren(update);
+                                    }else {
+                                        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("direcciones");
+                                        Map<String,Object> updateUbi = new HashMap<>();
+                                        updateUbi.put("calle", nombrecalle);
+                                        updateUbi.put("direccionLiteral", ciudad);
+                                        updateUbi.put("iduser", idusuario);
+                                        databaseReference1.child(registerHelper.getDireccion()).updateChildren(updateUbi);
+                                        Toast.makeText(UbicacionActivity.this, "Dirección actualizada correctamente", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(UbicacionActivity.this, MainActivity.class));
+
+                                    }
+
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
                         }
                     });
 

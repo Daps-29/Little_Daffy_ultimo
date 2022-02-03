@@ -14,6 +14,7 @@ import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.littledaffy.Utility.NetworkChangeListener;
@@ -51,6 +52,7 @@ public class TodasMascotas extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     ConstraintLayout progress_bar;
     SwipeRefreshLayout swipeRefreshLayout;
+    LinearLayout listavacia;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
@@ -60,6 +62,7 @@ public class TodasMascotas extends AppCompatActivity {
         setContentView(R.layout.activity_todas_mascotas);
 
         progress_bar = (ConstraintLayout) findViewById(R.id.progress_bar);
+        listavacia = (LinearLayout) findViewById(R.id.listavacia);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_back);
@@ -73,22 +76,20 @@ public class TodasMascotas extends AppCompatActivity {
         rv_categorias.setLayoutManager(categories_layoutManager);
 
         categoriesAdapterArrayList = new ArrayList<>();
-        CategoriasDto categoria1 = new CategoriasDto(0,"Gatos", getResources().getDrawable(R.drawable.cate));
-        CategoriasDto categoria2 = new CategoriasDto(1,"Perros", getResources().getDrawable(R.drawable.cate2));
-        CategoriasDto categoria3 = new CategoriasDto(2,"Conejos", getResources().getDrawable(R.drawable.cate));
-        CategoriasDto categoria4 = new CategoriasDto(3,"Aves", getResources().getDrawable(R.drawable.cate));
-        CategoriasDto categoria5 = new CategoriasDto(4,"Hamsters", getResources().getDrawable(R.drawable.cate));
-        CategoriasDto categoria6 = new CategoriasDto(5,"Otros", getResources().getDrawable(R.drawable.cate));
+        CategoriasDto categoria1 = new CategoriasDto(0,"Gatos", getResources().getDrawable(R.drawable.gato));
+        CategoriasDto categoria2 = new CategoriasDto(1,"Perros", getResources().getDrawable(R.drawable.perro));
+        CategoriasDto categoria3 = new CategoriasDto(2,"Conejos", getResources().getDrawable(R.drawable.conejo));
+        CategoriasDto categoria4 = new CategoriasDto(3,"Aves", getResources().getDrawable(R.drawable.ave));
+        CategoriasDto categoria5 = new CategoriasDto(4,"Hamsters", getResources().getDrawable(R.drawable.hamster));
         categoriesAdapterArrayList.add(categoria1);
         categoriesAdapterArrayList.add(categoria2);
         categoriesAdapterArrayList.add(categoria3);
         categoriesAdapterArrayList.add(categoria4);
         categoriesAdapterArrayList.add(categoria5);
-        categoriesAdapterArrayList.add(categoria6 );
 
         categoriesAdapter = new CategoriesAdapter(categoriesAdapterArrayList);
         rv_categorias.setAdapter(categoriesAdapter);
-;
+
         rv_categorias.addOnItemTouchListener(new RecyclerItemClickListener(this, rv_categorias, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -142,15 +143,19 @@ public class TodasMascotas extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mascotaDtoArrayList.clear();
-
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MascotaDto mascotaDto = dataSnapshot.getValue(MascotaDto.class);
 
                     if (mascotaDto.getVerificacion() == 1 && mascotaDto.getEstado().equals("1")) {
                         progress_bar.setVisibility(View.GONE);
+                        listavacia.setVisibility(View.GONE);
                         mascotaDtoArrayList.add(mascotaDto);
 
                     }
+                }
+                if (mascotaDtoArrayList.size() == 0){
+                    progress_bar.setVisibility(View.GONE);
+                    listavacia.setVisibility(View.VISIBLE);
                 }
 
                 todasMascotasAdapter.notifyDataSetChanged();
