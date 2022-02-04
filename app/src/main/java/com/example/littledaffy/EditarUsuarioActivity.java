@@ -1,7 +1,9 @@
 package com.example.littledaffy;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.littledaffy.Utility.NetworkChangeListener;
 import com.example.littledaffy.model.RegisterHelper;
@@ -62,6 +65,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         direccion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dameubicacion();
                 startActivity(new Intent(EditarUsuarioActivity.this, UbicacionActivity.class));
             }
         });
@@ -128,6 +132,17 @@ public class EditarUsuarioActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void dameubicacion() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(EditarUsuarioActivity.this, UbicacionActivity.class);
+            startActivity(intent);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
     }
 
 

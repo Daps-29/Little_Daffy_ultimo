@@ -84,7 +84,11 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
         mMap = googleMap;
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
+         return;
+        }else {
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
         mMap.setMyLocationEnabled(true);
 
@@ -114,10 +118,12 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
                             List<Address> list = geocoder.getFromLocation(
                                     latitud, longitud, 1);
                             if (!list.isEmpty()) {
-                                nombrecalle = list.get(0).getFeatureName();
+                                String calle = list.get(0).getFeatureName();
                                 ciudad = list.get(0).getLocality();
                                 String Estado = list.get(0).getAdminArea();
-                                String country = list.get(0).getCountryName();
+                                nombrecalle = list.get(0).getCountryName();
+                                String address = list.get(0).getAddressLine(0);
+                                String zipCode = list.get(0).getPostalCode();
 
 //                                Toast.makeText(UbicacionActivity.this, "Direc: " + Estado, Toast.LENGTH_SHORT).show();
                             }
@@ -133,7 +139,7 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
-                                    if (registerHelper.getDireccion() == null && registerHelper.getDireccion() == ""){
+                                    if (registerHelper.getDireccion() == null || registerHelper.getDireccion().equals("")){
                                         String idDireccion = databaseReference.push().getKey();
                                         String calle = nombrecalle;
                                         String referencia = "";
