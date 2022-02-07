@@ -128,7 +128,7 @@ public class MascotaNuevaActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Estado);
         estado.setAdapter(adapter);
 
-        String[]Categorias={"Perros","Gatos","Aves","Roedores"};
+        String[]Categorias={"Perros","Gatos","Aves","Hamsters","Conejos"};
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Categorias);
         categoria.setAdapter(adapter1);
 

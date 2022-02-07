@@ -146,7 +146,7 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
                                         String iduser = idusuario;
                                         String direccionLiteral = ciudad;
                                         DireccionDto direccionDto = new DireccionDto(idDireccion, calle, referencia, iduser, latitud.toString(), longitud.toString(), direccionLiteral);
-                                        databaseReference.child("").child(idDireccion).setValue(direccionDto);
+                                        databaseReference.child(idDireccion).setValue(direccionDto);
                                         Toast.makeText(UbicacionActivity.this, "Dirección agregada correctamente", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(UbicacionActivity.this, MainActivity.class));
 

@@ -165,7 +165,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:layout_marginRight="30dp">
+                    android:layout_marginRight="30dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/DistanciaUbicacion"
@@ -177,6 +178,19 @@
                         android:text="5 Km"
                         android:textColor="#42995C"
                         android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/nombremascotainfo"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/nombremascotainfo" />
+                    <TextView
+                        android:id="@+id/ubi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="end"
+                        android:fontFamily="serif"
+                        android:text="Calacoto"
+                        android:textColor="#42995C"
+                        android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="@+id/nombremascotainfo"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/nombremascotainfo" />

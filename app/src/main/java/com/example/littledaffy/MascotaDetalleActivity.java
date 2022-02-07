@@ -41,7 +41,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MascotaDetalleActivity extends AppCompatActivity {
     CircleImageView imag;
-    TextView nombreuser,edad,categoria,estado,nombremascotainfo,descipcion,raza,vacuna, DistanciaUbicacion;
+    TextView nombreuser,edad,categoria,estado,nombremascotainfo,descipcion,raza,vacuna, DistanciaUbicacion,ubi;
     ImageView foto1,foto2,back;
     String mascotaid,iduser,nombremascota;
     DatabaseReference mascotainfo, infouser;
@@ -80,6 +80,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
         descipcion = findViewById(R.id.descripcioninfo);
         whatsapp = findViewById(R.id.telf);
         DistanciaUbicacion = findViewById(R.id.DistanciaUbicacion);
+        ubi = findViewById(R.id.ubi);
 
         imag = findViewById(R.id.imagendetalle);
         nombreuser = findViewById(R.id.nombredetalleuser);
@@ -208,6 +209,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
                 estado.setText(mascotaDto.getSexo());
                 raza.setText(mascotaDto.getRaza());
                 vacuna.setText(mascotaDto.getVacuna());
+                ubi.setText(mascotaDto.getUbicacion());
                 estadomasco = mascotaDto.getEstadoperdida();
                 estadomasco1 = mascotaDto.getEstado();
                 if (estadomasco.equals("Desaparecido") || estadomasco.equals("Adopción")) {
