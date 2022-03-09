@@ -81,11 +81,11 @@ public class TodasMascotas extends AppCompatActivity {
         rv_categorias.setLayoutManager(categories_layoutManager);
 
         categoriesAdapterArrayList = new ArrayList<>();
-        CategoriasDto categoria1 = new CategoriasDto(0,"Gatos", getResources().getDrawable(R.drawable.gato));
-        CategoriasDto categoria2 = new CategoriasDto(1,"Perros", getResources().getDrawable(R.drawable.perro));
-        CategoriasDto categoria3 = new CategoriasDto(2,"Conejos", getResources().getDrawable(R.drawable.conejo));
-        CategoriasDto categoria4 = new CategoriasDto(3,"Aves", getResources().getDrawable(R.drawable.ave));
-        CategoriasDto categoria5 = new CategoriasDto(4,"Hamsters", getResources().getDrawable(R.drawable.hamster));
+        CategoriasDto categoria1 = new CategoriasDto(0,"Gatos", getResources().getDrawable(R.drawable.catulti));
+        CategoriasDto categoria2 = new CategoriasDto(1,"Perros", getResources().getDrawable(R.drawable.dogulti));
+        CategoriasDto categoria3 = new CategoriasDto(2,"Conejos", getResources().getDrawable(R.drawable.rabbitulti));
+        CategoriasDto categoria4 = new CategoriasDto(3,"Aves", getResources().getDrawable(R.drawable.birdulto));
+        CategoriasDto categoria5 = new CategoriasDto(4,"Hamsters", getResources().getDrawable(R.drawable.hamsterulti));
         categoriesAdapterArrayList.add(categoria1);
         categoriesAdapterArrayList.add(categoria2);
         categoriesAdapterArrayList.add(categoria3);

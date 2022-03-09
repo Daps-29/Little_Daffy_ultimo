@@ -7,5 +7,5 @@ dependencyResolutionManagement {
         maven { url "https://maven.xyz.com" }
     }
 }
-rootProject.name = "Little Daffy"
+rootProject.name = "Little Pet"
 include ':app'

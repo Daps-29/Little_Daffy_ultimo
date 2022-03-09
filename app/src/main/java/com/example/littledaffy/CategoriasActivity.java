@@ -71,19 +71,19 @@ public class CategoriasActivity extends AppCompatActivity {
         toolbarImage = (ImageView) findViewById(R.id.toolbarImage);
         switch (idCategoria){
             case "0":
-                toolbarImage.setImageResource(R.drawable.gato);
+                toolbarImage.setImageResource(R.drawable.catulti);
                 break;
             case "1":
-                toolbarImage.setImageResource(R.drawable.perro);
+                toolbarImage.setImageResource(R.drawable.dogulti);
                 break;
             case "2":
-                toolbarImage.setImageResource(R.drawable.conejo);
+                toolbarImage.setImageResource(R.drawable.rabbitulti);
                 break;
             case "3":
-                toolbarImage.setImageResource(R.drawable.ave);
+                toolbarImage.setImageResource(R.drawable.birdulto);
                 break;
             case "4":
-                toolbarImage.setImageResource(R.drawable.hamster);
+                toolbarImage.setImageResource(R.drawable.hamsterulti);
                 break;
             default:
                 toolbarImage.setImageResource(R.drawable.perro);

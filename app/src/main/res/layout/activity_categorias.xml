@@ -21,15 +21,17 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="bottom|center_horizontal"
             app:collapsedTitleGravity="center_vertical"
-            app:title="Nombre categoria">
+            app:title="Nombre categoria"
+            >
 
             <ImageView
+                android:layout_gravity="center"
                 android:id="@+id/toolbarImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
-                android:src="@drawable/a"
+                android:src="@drawable/birdulto"
                 app:layout_collapseMode="parallax" />
 
             <androidx.appcompat.widget.Toolbar
