@@ -6,7 +6,7 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UbicacionActivity" >
+    tools:context="app.wsu.littledaffy.UbicacionActivity" >
     <Button
         android:id="@+id/btnguardarubicacion"
         android:layout_width="wrap_content"

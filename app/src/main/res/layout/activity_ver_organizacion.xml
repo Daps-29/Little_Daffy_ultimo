@@ -165,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
                 android:layout_below="@+id/nested"
-                tools:context=".VerOrganizacionesActivity"
+                tools:context="app.wsu.littledaffy.VerOrganizacionesActivity"
                 />
 
             <LinearLayout

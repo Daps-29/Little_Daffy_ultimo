@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Little Pet</string>
+    <string name="app_name">Little Daffy</string>
     <string name="facebook_app_id">445240413854401</string>
     <string name="fb_login_protocol_scheme">fb445240413854401</string>
     <string name="title_activity_maps">MapsActivity</string>
@@ -20,4 +20,5 @@
     <string name="desc_three">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</string>
     <string name="desc_fourth">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</string>
     <string name="title_activity_ubicacion">UbicacionActivity</string>
+    <string name="title_activity_maps2">MapsActivity2</string>
 </resources>

@@ -4,12 +4,12 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=D5:F0:7B:F4:2A:72:16:BD:D3:2E:27:F7:D4:10:B1:5B:4F:0E:EC:B1%3Bcom.example.littledaffy
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=D5:F0:7B:F4:2A:72:16:BD:D3:2E:27:F7:D4:10:B1:5B:4F:0E:EC:B1%3Bapp.wsu.littledaffy
 
     You can also add your credentials to an existing key, using these values:
 
     Package name:
-    com.example.littledaffy
+    app.wsu.littledaffy
 
     SHA-1 certificate fingerprint:
     D5:F0:7B:F4:2A:72:16:BD:D3:2E:27:F7:D4:10:B1:5B:4F:0E:EC:B1

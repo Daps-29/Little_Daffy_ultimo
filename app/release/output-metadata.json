@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.littledaffy",
+  "applicationId": "app.wsu.littledaffy",
   "variantName": "release",
   "elements": [
     {

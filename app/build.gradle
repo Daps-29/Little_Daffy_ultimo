@@ -3,13 +3,14 @@ plugins {
     id 'com.google.gms.google-services'
 // Apply the Crashlytics Gradle plugin
     id 'com.google.firebase.crashlytics'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.littledaffy"
+        applicationId "app.wsu.littledaffy"
         minSdk 22
         targetSdk 31
         versionCode 1
