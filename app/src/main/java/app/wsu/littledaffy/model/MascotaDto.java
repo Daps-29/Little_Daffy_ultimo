@@ -8,10 +8,12 @@ public class MascotaDto {
     private String categorias, fecha, raza, sexo, estado,estadoperdida, tiempo;
     private String foto1, foto2, foto3;
     private String ubicacion, vacuna, user;
-    private String nombre, descripcion, id_mascota;
+    private String nombre, descripcion, id_mascota, organizacion;
+
+
 
     //CONSTRUCTOR
-    public MascotaDto(String id_mascota, int edad, String estado, String estadoperdida, String tiempo, int verificacion, String categorias, String fecha, String raza, String sexo, String foto1, String foto2, String foto3, String ubicacion, String vacuna, String user, String nombre, String descripcion) {
+    public MascotaDto(String id_mascota, int edad, String estado, String estadoperdida, String tiempo, int verificacion, String categorias, String fecha, String raza, String sexo, String foto1, String foto2, String foto3, String ubicacion, String vacuna, String user, String nombre, String descripcion, String organizacion) {
         this.edad = edad;
         this.estado = estado;
         this.estadoperdida = estadoperdida;
@@ -30,6 +32,15 @@ public class MascotaDto {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.id_mascota = id_mascota;
+        this.organizacion = organizacion;
+    }
+
+    public String getOrganizacion() {
+        return organizacion;
+    }
+
+    public void setOrganizacion(String organizacion) {
+        this.organizacion = organizacion;
     }
 
     public String getId_mascota() {

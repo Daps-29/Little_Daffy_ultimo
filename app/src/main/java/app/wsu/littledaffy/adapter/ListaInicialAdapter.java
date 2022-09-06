@@ -113,6 +113,7 @@ public class ListaInicialAdapter extends RecyclerView.Adapter<ListaInicialAdapte
                 intent.putExtra("user", currentItem.getUser());
                 intent.putExtra("id_mascota", currentItem.getId_mascota());
                 intent.putExtra("ubicacion", currentItem.getUbicacion());
+                intent.putExtra("organizacion", currentItem.getOrganizacion());
                 holder.context.startActivity(intent);
            }
         });

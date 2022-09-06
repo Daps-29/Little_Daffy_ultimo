@@ -36,6 +36,7 @@ import com.squareup.picasso.Picasso;
 import app.wsu.littledaffy.Utility.NetworkChangeListener;
 import app.wsu.littledaffy.model.DireccionDto;
 import app.wsu.littledaffy.model.MascotaDto;
+import app.wsu.littledaffy.model.OrganizacionDto;
 import app.wsu.littledaffy.model.RegisterHelper;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,7 +44,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
     CircleImageView imag;
     TextView nombreuser,edad,categoria,estado,nombremascotainfo,descipcion,raza,vacuna, DistanciaUbicacion,ubi;
     ImageView foto1,foto2,back;
-    String mascotaid,iduser,nombremascota;
+    String mascotaid,iduser,organizacion;
     DatabaseReference mascotainfo, infouser;
     FloatingActionButton whatsapp;
     FirebaseAuth mAuth;
@@ -51,6 +52,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
     String telf, id;
     String estadomasco;
     String estadomasco1;
+
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     @Override
@@ -102,104 +104,194 @@ public class MascotaDetalleActivity extends AppCompatActivity {
 
         //OBTENER DATOS DE LA ANTERIOR ACTIVITY
         Intent intent = getIntent();
+        organizacion = intent.getStringExtra("organizacion");
         iduser = intent.getStringExtra("user");
         mascotaid = intent.getStringExtra("id_mascota");
         mascotainfo = FirebaseDatabase.getInstance().getReference("mascotas").child(mascotaid);
         infouser = FirebaseDatabase.getInstance().getReference("usuarios").child(iduser);
+
         FirebaseUser user = mAuth.getCurrentUser();
 
         //RECUPERAMOS INFORMACION PARA LLENAR EL ACTIVITY
-        infouser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
+        if(!iduser.equals("") ){
+            infouser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
 
+                        RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
 
-                RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
-
-                nombreuser.setText(registerHelper.getNombres() + " " + registerHelper.getApellidos());
-                telf = registerHelper.getTelefono() + "";
-                Picasso.get().load(registerHelper.getFoto()).placeholder(R.drawable.a).into(imag, new Callback() {
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        Log.e("PICASSO ERROR", "onError: " + e);
-                    }
-                });
-
-                FirebaseDatabase.getInstance().getReference("direcciones")
-                        .child(registerHelper.getDireccion())
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                        nombreuser.setText(registerHelper.getNombres() + " " + registerHelper.getApellidos());
+                        telf = registerHelper.getTelefono() + "";
+                        Picasso.get().load(registerHelper.getFoto()).placeholder(R.drawable.a).into(imag, new Callback() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
-                                    Location ubicacionMascota = new Location("Ubicacion mascota");
-                                    ubicacionMascota.setLatitude(Double.parseDouble(direccionDto.getLatitud()));
-                                    ubicacionMascota.setLongitude(Double.parseDouble(direccionDto.getLongitud()));
+                            public void onSuccess() {
 
-                                    FirebaseDatabase.getInstance().getReference("usuarios")
-                                            .child(id)
-                                            .addValueEventListener(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    if (dataSnapshot.exists()) {
-                                                        RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
-                                                        FirebaseDatabase.getInstance().getReference("direcciones")
-                                                                .child(registerHelper.getDireccion())
-                                                                .addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                    @Override
-                                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                        if (dataSnapshot.exists()) {
-                                                                            DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
-                                                                            Location ubicacionUsuario = new Location("Ubicacion Usuario");
-                                                                            ubicacionUsuario.setLatitude(Double.parseDouble(direccionDto.getLatitud()));
-                                                                            ubicacionUsuario.setLongitude(Double.parseDouble(direccionDto.getLongitud()));
-
-                                                                            if (direccionDto.getLongitud() == null || direccionDto.getLatitud() == null) {
-                                                                                return;
-                                                                            }
-                                                                            float distance = ubicacionMascota.distanceTo(ubicacionUsuario);
-                                                                            double distancia = distance / 1000;
-                                                                            distancia = Math.round(distancia * 100.0) / 100.0;
-                                                                            DistanciaUbicacion.setText(String.valueOf(distancia) + " Km");
-
-                                                                        }
-                                                                    }
-
-                                                                    @Override
-                                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                                                                    }
-                                                                });
-
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                                }
-                                            });
-
-                                }
                             }
 
                             @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            public void onError(Exception e) {
+                                Log.e("PICASSO ERROR", "onError: " + e);
                             }
                         });
 
-            }
-            }
+                        FirebaseDatabase.getInstance().getReference("direcciones")
+                                .child(registerHelper.getDireccion())
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
+                                            Location ubicacionMascota = new Location("Ubicacion mascota");
+                                            ubicacionMascota.setLatitude(Double.parseDouble(direccionDto.getLatitud()));
+                                            ubicacionMascota.setLongitude(Double.parseDouble(direccionDto.getLongitud()));
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            FirebaseDatabase.getInstance().getReference("usuarios")
+                                                    .child(id)
+                                                    .addValueEventListener(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                            if (dataSnapshot.exists()) {
+                                                                RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
+                                                                FirebaseDatabase.getInstance().getReference("direcciones")
+                                                                        .child(registerHelper.getDireccion())
+                                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                            @Override
+                                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                                if (dataSnapshot.exists()) {
+                                                                                    DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
+                                                                                    Location ubicacionUsuario = new Location("Ubicacion Usuario");
+                                                                                    ubicacionUsuario.setLatitude(Double.parseDouble(direccionDto.getLatitud()));
+                                                                                    ubicacionUsuario.setLongitude(Double.parseDouble(direccionDto.getLongitud()));
 
-            }
-        });
+                                                                                    if (direccionDto.getLongitud() == null || direccionDto.getLatitud() == null) {
+                                                                                        return;
+                                                                                    }
+                                                                                    float distance = ubicacionMascota.distanceTo(ubicacionUsuario);
+                                                                                    double distancia = distance / 1000;
+                                                                                    distancia = Math.round(distancia * 100.0) / 100.0;
+                                                                                    DistanciaUbicacion.setText(String.valueOf(distancia) + " Km");
+
+                                                                                }
+                                                                            }
+
+                                                                            @Override
+                                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                                            }
+                                                                        });
+
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                        }
+                                                    });
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
+
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }else{
+
+            FirebaseDatabase.getInstance().getReference("organizaciones")
+                    .child(organizacion)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            if (dataSnapshot.exists()) {
+
+                                OrganizacionDto organizacionDto = dataSnapshot.getValue(OrganizacionDto.class);
+
+                                nombreuser.setText(organizacionDto.getNombre() );
+                                telf = organizacionDto.getContacto() + "";
+                                Picasso.get().load(organizacionDto.getFoto()).placeholder(R.drawable.a).into(imag, new Callback() {
+                                    @Override
+                                    public void onSuccess() {
+
+                                    }
+
+                                    @Override
+                                    public void onError(Exception e) {
+                                        Log.e("PICASSO ERROR", "onError: " + e);
+                                    }
+                                });
+
+
+                                Location ubicacionMascota = new Location("Ubicacion mascota");
+                                ubicacionMascota.setLatitude(Double.parseDouble(organizacionDto.getLatitud()));
+                                ubicacionMascota.setLongitude(Double.parseDouble(organizacionDto.getLongitud()));
+
+                                FirebaseDatabase.getInstance().getReference("usuarios")
+                                        .child(id)
+                                        .addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.exists()) {
+                                                    RegisterHelper registerHelper = dataSnapshot.getValue(RegisterHelper.class);
+                                                    FirebaseDatabase.getInstance().getReference("direcciones")
+                                                            .child(registerHelper.getDireccion())
+                                                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                    if (dataSnapshot.exists()) {
+                                                                        DireccionDto direccionDto = dataSnapshot.getValue(DireccionDto.class);
+                                                                        Location ubicacionUsuario = new Location("Ubicacion Usuario");
+                                                                        ubicacionUsuario.setLatitude(Double.parseDouble(direccionDto.getLatitud()));
+                                                                        ubicacionUsuario.setLongitude(Double.parseDouble(direccionDto.getLongitud()));
+
+                                                                        if (direccionDto.getLongitud() == null || direccionDto.getLatitud() == null) {
+                                                                            return;
+                                                                        }
+                                                                        float distance = ubicacionMascota.distanceTo(ubicacionUsuario);
+                                                                        double distancia = distance / 1000;
+                                                                        distancia = Math.round(distancia * 100.0) / 100.0;
+                                                                        DistanciaUbicacion.setText(String.valueOf(distancia) + " Km");
+
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                                }
+                                                            });
+
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            }
+                                        });
+
+                            }
+                        }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+
+
+                            }
+                    });
+        }
+
 
 
         mascotainfo.addValueEventListener(new ValueEventListener() {

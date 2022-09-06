@@ -292,7 +292,7 @@ public class MascotaNuevaActivity extends AppCompatActivity {
 
                                                          String mascotaid = databaseReference.push().getKey();
 
-                                                         MascotaDto mascotaDto = new MascotaDto(mascotaid, Integer.parseInt(ed), estadoeli, publicacion, tiem, verificacion, cate, fec, ra, se, fourl1, ur, url3, ubi, vacu, idu, nom, des);
+                                                         MascotaDto mascotaDto = new MascotaDto(mascotaid, Integer.parseInt(ed), estadoeli, publicacion, tiem, verificacion, cate, fec, ra, se, fourl1, ur, url3, ubi, vacu, idu, nom, des, "");
                                                          databaseReference.child("").child(mascotaid).setValue(mascotaDto);
                                                          opendialog();
 
