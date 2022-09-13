@@ -10,12 +10,12 @@ public class OrganizacionDto {
     private String foto, foto_portada;
     private String horaen, horafin;
     private String nombre, latitud, longitud, referencia;
-    private String lunes, martes, miercoles, jueves, viernes, sabado, domingo;
+    private String lunes, martes, miercoles, jueves, viernes, sabado, domingo,ciudad;
 
     //CONSTRUCTOR
     public OrganizacionDto(){}
 
-    public OrganizacionDto(int estado_organizacion, int contacto, String id_organizacion, String descripcion, String direccion, String direccion_literal, String foto, String foto_portada, String horaen, String horafin, String nombre, String latitud, String longitud, String referencia, String lunes, String martes, String miercoles, String jueves, String viernes, String sabado, String domingo) {
+    public OrganizacionDto(int estado_organizacion, int contacto, String id_organizacion, String descripcion, String direccion, String direccion_literal, String foto, String foto_portada, String horaen, String horafin, String nombre, String latitud, String longitud, String referencia, String lunes, String martes, String miercoles, String jueves, String viernes, String sabado, String domingo,String ciudad) {
         this.estado_organizacion = estado_organizacion;
         this.contacto = contacto;
         this.id_organizacion = id_organizacion;
@@ -37,8 +37,16 @@ public class OrganizacionDto {
         this.viernes = viernes;
         this.sabado = sabado;
         this.domingo = domingo;
+        this.ciudad = ciudad;
     }
 
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
 
     public String getLatitud() {
         return latitud;
