@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import app.wsu.littledaffy.R;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
@@ -100,7 +99,7 @@ public class LoginTabFragment extends Fragment {
                     startActivity(new Intent(LoginTabFragment.this.getContext(),MainActivity.class));
 
                 }else{
-                    Toast.makeText(LoginTabFragment.this.getContext(), "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginTabFragment.this.getContext(), "Usuario o Contraseña Incorrecto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
