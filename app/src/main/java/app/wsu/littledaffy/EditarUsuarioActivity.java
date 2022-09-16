@@ -142,7 +142,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
+//                    Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
     }
