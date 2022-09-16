@@ -64,6 +64,8 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         editar = findViewById(R.id.editarperfil);
         cambio = findViewById(R.id.cambio);
 
+        dameubicacion();
+
         direccion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

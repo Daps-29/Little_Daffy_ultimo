@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CODIGOS/Little_Daffy_ultimo/app/src/main/res/layout/activity_editar_usuario.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/aleda/Documents/Android/app/src/main/res/drawable-v24/icon_reloj.xml" value="0.11796875" />
         <entry key="..\:/Users/aleda/Documents/Android/app/src/main/res/drawable-v24/shape.xml" value="0.11796875" />
         <entry key="..\:/Users/aleda/Documents/Android/app/src/main/res/drawable/button_bg.xml" value="0.11796875" />
@@ -117,22 +118,14 @@
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/dpint/Documents/LittleDaffy/DaffyLittle/Little_Daffy_ultimo/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/drawable/ic_baseline_pets_24.xml" value="0.197" />
-        <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/activity_login.xml" value="0.20471014492753623" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/activity_main.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/activity_maps.xml" value="0.10364583333333334" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/activity_maps2.xml" value="0.1" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/activity_mascota_detalle.xml" value="0.1" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/activity_mascota_nueva.xml" value="0.1" />
-        <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/activity_registro.xml" value="0.20471014492753623" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/activity_ubicacion.xml" value="0.1" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/activity_ver_organizacion.xml" value="0.1" />
-        <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/card_categoria.xml" value="0.1765625" />
-        <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/card_encontrados.xml" value="0.1765625" />
-        <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/card_lista_inicial.xml" value="0.1765625" />
-        <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/card_mascota.xml" value="0.1765625" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/fragment_collar.xml" value="0.1" />
-        <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/login_tab_fragment.xml" value="0.20471014492753623" />
-        <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/layout/signup_tab_fragment.xml" value="0.20471014492753623" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.197" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.197" />
         <entry key="..\:/Users/dpint/OneDrive/Documentos/App Little Daffy/Little_Daffy_ultimo/app/src/main/res/mipmap-anydpi-v26/ic_logo.xml" value="0.115" />
