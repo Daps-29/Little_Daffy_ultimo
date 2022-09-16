@@ -131,7 +131,7 @@ public class MascotaDetalleActivity extends AppCompatActivity {
 
                             @Override
                             public void onError(Exception e) {
-                                Log.e("PICASSO ERROR", "onError: " + e);
+                                //Log.e("PICASSO ERROR", "onError: " + e);
                             }
                         });
 

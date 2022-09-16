@@ -14,9 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import app.wsu.littledaffy.R;
-
-import app.wsu.littledaffy.adapter.LoginAdapter;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -44,6 +41,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+
+import app.wsu.littledaffy.adapter.LoginAdapter;
 
 public class LoginActivity extends AppCompatActivity {
     TabLayout tabLayout;
@@ -85,13 +84,32 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.fab_facebook);
         loginButton.setReadPermissions("email","public_profile");
         tabLayout.addTab(tabLayout.newTab().setText("Ingresar"));
-        tabLayout.addTab(tabLayout.newTab().setText("Registrar"));
+        tabLayout.addTab(tabLayout.newTab().setText("Registrate"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         loginb = findViewById(R.id.login);
         final LoginAdapter adapter = new LoginAdapter(getSupportFragmentManager(),this, tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tabLayout.getSelectedTabPosition());
+                if (tabLayout.getSelectedTabPosition() == 1){
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         google.setTranslationY(300);
         tabLayout.setTranslationY(300);
 

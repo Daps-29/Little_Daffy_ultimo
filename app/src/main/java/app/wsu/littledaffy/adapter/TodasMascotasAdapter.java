@@ -13,15 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import app.wsu.littledaffy.MascotaDetalleActivity;
-import app.wsu.littledaffy.R;
-import app.wsu.littledaffy.TodasMascotas;
-import app.wsu.littledaffy.model.MascotaDto;
-
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import app.wsu.littledaffy.MascotaDetalleActivity;
+import app.wsu.littledaffy.R;
+import app.wsu.littledaffy.TodasMascotas;
+import app.wsu.littledaffy.model.MascotaDto;
 
 public class TodasMascotasAdapter extends RecyclerView.Adapter<TodasMascotasAdapter.MyViewHolder> {
 
@@ -84,6 +84,7 @@ public class TodasMascotasAdapter extends RecyclerView.Adapter<TodasMascotasAdap
                 intent.putExtra("user", currentItem.getUser());
                 intent.putExtra("id_mascota", currentItem.getId_mascota());
                 intent.putExtra("ubicacion", currentItem.getUbicacion());
+                intent.putExtra("organizacion", currentItem.getOrganizacion());
                 holder.context.startActivity(intent);
             }
         });
