@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import app.wsu.littledaffy.databinding.ActivityUbicacionBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,7 +38,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import app.wsu.littledaffy.R;
+import app.wsu.littledaffy.databinding.ActivityUbicacionBinding;
 import app.wsu.littledaffy.model.DireccionDto;
 import app.wsu.littledaffy.model.RegisterHelper;
 
@@ -57,7 +56,7 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        dameubicacion();
+        //dameubicacion();
 
         super.onCreate(savedInstanceState);
 
@@ -193,16 +192,16 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
 
     }
 
-    private void dameubicacion() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Intent intent = new Intent(String.valueOf(UbicacionActivity.class));
-            startActivity(intent);
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{
-//                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-    }
+//    private void dameubicacion() {
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//            Intent intent = new Intent(String.valueOf(UbicacionActivity.class));
+//            startActivity(intent);
+//        } else {
+//            ActivityCompat.requestPermissions(this, new String[]{
+////                    Manifest.permission.ACCESS_COARSE_LOCATION,
+//                    Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+//        }
+//    }
 
 
 }

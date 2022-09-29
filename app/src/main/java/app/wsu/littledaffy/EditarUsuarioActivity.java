@@ -18,10 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import app.wsu.littledaffy.R;
-
-import app.wsu.littledaffy.Utility.NetworkChangeListener;
-import app.wsu.littledaffy.model.RegisterHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +31,8 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+import app.wsu.littledaffy.Utility.NetworkChangeListener;
+import app.wsu.littledaffy.model.RegisterHelper;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditarUsuarioActivity extends AppCompatActivity {
@@ -64,7 +62,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
         editar = findViewById(R.id.editarperfil);
         cambio = findViewById(R.id.cambio);
 
-        dameubicacion();
+        //dameubicacion();
 
         direccion.setOnClickListener(new View.OnClickListener() {
             @Override

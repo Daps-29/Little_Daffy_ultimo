@@ -81,7 +81,7 @@
                     android:id="@+id/ubicacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                    android:drawableLeft="@drawable/location"
                     android:drawablePadding="5dp"
                     android:padding="2dp"
                     android:text="Ubicacion"
