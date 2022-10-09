@@ -56,8 +56,6 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //dameubicacion();
-
         super.onCreate(savedInstanceState);
 
         binding = ActivityUbicacionBinding.inflate(getLayoutInflater());
@@ -84,13 +82,20 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-            //&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-         return;
-        }else {
-        ActivityCompat.requestPermissions(this, new String[]{
-//                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+//            //&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+//         return;
+//        }else {
+//        ActivityCompat.requestPermissions(this, new String[]{
+////                Manifest.permission.ACCESS_COARSE_LOCATION,
+//                Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+//        }
+        dameubicacion();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{
+//                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
         }
         mMap.setMyLocationEnabled(true);
 
@@ -192,16 +197,16 @@ public class UbicacionActivity extends FragmentActivity implements OnMapReadyCal
 
     }
 
-//    private void dameubicacion() {
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//            Intent intent = new Intent(String.valueOf(UbicacionActivity.class));
-//            startActivity(intent);
-//        } else {
-//            ActivityCompat.requestPermissions(this, new String[]{
-////                    Manifest.permission.ACCESS_COARSE_LOCATION,
-//                    Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-//        }
-//    }
+    private void dameubicacion() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(UbicacionActivity.this, EditarUsuarioActivity.class);
+            startActivity(intent);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{
+//                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+    }
 
 
 }
