@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "192281074525-508ianff1flmgts00jd85icar8umsu66.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.wsu.littledaffy",
+            "certificate_hash": "e1b19bc0ad5a86b80615a1dd4abd08d98e84789a"
+          }
+        },
+        {
           "client_id": "192281074525-5np6f2nbokd08ffbepapt7ig7par4622.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -23,11 +31,19 @@
           }
         },
         {
-          "client_id": "192281074525-crugmvs5cp79cv15kcpbcmj64jpic0jm.apps.googleusercontent.com",
+          "client_id": "192281074525-c693rtcvl23sh83tqq251pvbv22j12f4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "app.wsu.littledaffy",
             "certificate_hash": "02ed680546fabf01f1dfd7ca8a15b15a54cf1a8e"
+          }
+        },
+        {
+          "client_id": "192281074525-gm5n1v7nu1d14c0kotpfr6up664jl025.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.wsu.littledaffy",
+            "certificate_hash": "83147a1cb0d0454910f6187602fd3550285abf2e"
           }
         },
         {
