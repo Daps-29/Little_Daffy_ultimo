@@ -23,7 +23,7 @@
             app:collapsedTitleGravity="center_vertical"
             app:title="Organizaciones">
 
-            
+              
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
