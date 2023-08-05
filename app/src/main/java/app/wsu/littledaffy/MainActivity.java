@@ -55,6 +55,7 @@ import app.wsu.littledaffy.fragments.LogrosFragment;
 import app.wsu.littledaffy.fragments.MisMascotasFragment;
 import app.wsu.littledaffy.fragments.MyProfileFragment;
 import app.wsu.littledaffy.fragments.OrganizacionesFragment;
+import app.wsu.littledaffy.fragments.ReportesFragment;
 import app.wsu.littledaffy.model.DireccionDto;
 import app.wsu.littledaffy.model.RegisterHelper;
 
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private static final int POS_ORGANIZACIONES = 3;
     private static final int POS_MIS_MASCOTAS = 4;
     private static final int POS_LOGROS = 5;
+
+    private static final int POS_REPORTES = 6;
     private static final int POS_SALIR = 7;
     public static String CHANNEL_ID = "101";
 
@@ -126,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 createItemFor(POS_MIS_MASCOTAS),
 
                 createItemFor(POS_LOGROS),
+                createItemFor(POS_REPORTES),
                 new SpaceItem(260),
                 createItemFor(POS_SALIR)
         ));
@@ -234,6 +238,10 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         } else if (position == POS_LOGROS) {
             LogrosFragment logrosFragment = new LogrosFragment();
             transaction.replace(R.id.container, logrosFragment);
+            verificarDireccionUsuario();
+        } else if (position == POS_REPORTES) {
+            ReportesFragment reportesFragment = new ReportesFragment();
+            transaction.replace(R.id.container, reportesFragment);
             verificarDireccionUsuario();
         } else if (position == POS_SALIR) {
             firebaseAuth.signOut();
