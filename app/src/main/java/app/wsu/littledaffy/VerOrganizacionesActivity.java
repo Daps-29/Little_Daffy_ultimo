@@ -83,10 +83,6 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
 //        iddireccion = intent.getStringExtra("direccion");
         organizacionInfo = FirebaseDatabase.getInstance().getReference("organizaciones").child(organizacionId);
 
-
-
-
-
         nombreOrganizacion = (TextView) findViewById(R.id.nombreOrganizacion);
         descripcionOrganizacion = (TextView) findViewById(R.id.descripcionOrganizacion);
         horario = (TextView) findViewById(R.id.horario);
@@ -100,34 +96,36 @@ public class VerOrganizacionesActivity extends AppCompatActivity implements OnMa
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 OrganizacionDto organizacionDto = dataSnapshot.getValue(OrganizacionDto.class);
-                nombreOrganizacion.setText(organizacionDto.getNombre());
-                descripcionOrganizacion.setText(organizacionDto.getDescripcion());
-                horario.setText(organizacionDto.getHoraen() + " - " + organizacionDto.getHorafin());
-                direccionLiteral.setText(organizacionDto.getDireccion_literal());
-                celOrga = organizacionDto.getContacto()+"";
-                nombreOrga = organizacionDto.getNombre();
-                Picasso.get().load(organizacionDto.getFoto()).placeholder(R.drawable.a).into(profile_image, new Callback() {
-                    @Override
-                    public void onSuccess() {
+                if(organizacionDto != null) {
+                    nombreOrganizacion.setText(organizacionDto.getNombre());
+                    descripcionOrganizacion.setText(organizacionDto.getDescripcion());
+                    horario.setText(organizacionDto.getHoraen() + " - " + organizacionDto.getHorafin());
+                    direccionLiteral.setText(organizacionDto.getDireccion_literal());
+                    celOrga = organizacionDto.getContacto()+"";
+                    nombreOrga = organizacionDto.getNombre();
+                    Picasso.get().load(organizacionDto.getFoto()).placeholder(R.drawable.a).into(profile_image, new Callback() {
+                        @Override
+                        public void onSuccess() {
 
-                    }
+                        }
 
-                    @Override
-                    public void onError(Exception e) {
-                        Log.e("PICASSO ERROR", "onError: " + e);
-                    }
-                });
-                Picasso.get().load(organizacionDto.getFoto_portada()).placeholder(R.drawable.a).fit().into(fotoPortada, new Callback() {
-                    @Override
-                    public void onSuccess() {
+                        @Override
+                        public void onError(Exception e) {
+                            Log.e("PICASSO ERROR", "onError: " + e);
+                        }
+                    });
+                    Picasso.get().load(organizacionDto.getFoto_portada()).placeholder(R.drawable.a).fit().into(fotoPortada, new Callback() {
+                        @Override
+                        public void onSuccess() {
 
-                    }
+                        }
 
-                    @Override
-                    public void onError(Exception e) {
-                        Log.e("PICASSO ERROR", "onError: " + e);
-                    }
-                });
+                        @Override
+                        public void onError(Exception e) {
+                            Log.e("PICASSO ERROR", "onError: " + e);
+                        }
+                    });
+                }
             }
 
             @Override
