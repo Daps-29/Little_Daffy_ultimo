@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private void verificarDireccionUsuario() {
 
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        if (userId.length() > 0) {
+        if (userId != null && userId.length() > 0) {
             FirebaseDatabase.getInstance().getReference("usuarios")
                     .child(userId)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -361,6 +361,9 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
                         }
                     });
+        } else {
+            firebaseAuth.signOut();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
 
     }
