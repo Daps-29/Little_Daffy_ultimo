@@ -1,64 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f5f5f5"
-    android:paddingTop="10dp">
-
-    <ImageView
-        android:id="@+id/imageView"
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/layout_bg" />
+        android:background="#f5f5f5"
+        android:paddingTop="0dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/fotoestadp"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:padding="3dp"
-        android:src="@drawable/a"
-        app:civ_border_color="@color/fondo"
-        app:civ_border_width="0.8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+  <ImageView
+          android:id="@+id/imageView"
+          android:layout_width="match_parent"
+          android:layout_height="240dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:srcCompat="@drawable/layout_bg_mascotas"/>
 
-    <TextView
-        android:id="@+id/nombreestado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Jack Willson"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/fotoestadp"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/fotoestadp"
-        app:layout_constraintTop_toBottomOf="@+id/fotoestadp" />
+  <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/fotoestadp"
+          android:layout_width="150dp"
+          android:layout_height="150dp"
+          android:layout_gravity="center"
+          android:padding="3dp"
+          android:src="@drawable/a"
+          app:civ_border_color="@color/fondo"
+          app:civ_border_width="0.8dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/descripcionestado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="jackwillson@gmail.com"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/nombreestado"
-        app:layout_constraintStart_toStartOf="@+id/nombreestado"
-        app:layout_constraintTop_toBottomOf="@+id/nombreestado" />
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="250dp">
-        <LinearLayout
+  <TextView
+          android:id="@+id/nombreestado"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:text="Jack Willson"
+          android:textColor="#ffffff"
+          android:textSize="24sp"
+          android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="@+id/fotoestadp"
+          app:layout_constraintHorizontal_bias="0.494"
+          app:layout_constraintStart_toStartOf="@+id/fotoestadp"
+          app:layout_constraintTop_toBottomOf="@+id/fotoestadp"/>
+
+  <TextView
+          android:id="@+id/descripcionestado"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="jackwillson@gmail.com"
+          android:textColor="#ffffff"
+          android:textSize="18sp"
+          app:layout_constraintEnd_toEndOf="@+id/nombreestado"
+          app:layout_constraintStart_toStartOf="@+id/nombreestado"
+          app:layout_constraintTop_toBottomOf="@+id/nombreestado"/>
+
+  <ScrollView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:paddingTop="220dp">
+    <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,66 +68,79 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/white_background"
             android:orientation="vertical"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
+      <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="10dp"
+              android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/asdfgh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Estado Mascota:"
-                    android:textColor="@color/fondo"
-                    android:textSize="18sp" />
+        <TextView
+                android:id="@+id/asdfgh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Estado Mascota:"
+                android:textColor="@color/fondo"
+                android:textSize="18sp"/>
 
-                <Spinner
-                    android:id="@+id/Cambiar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="viewEnd"
-                    android:textColor="#5b5b5b"
-                    android:textSize="18sp" />
-            </LinearLayout>
+        <Spinner
+                android:id="@+id/Cambiar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="viewEnd"
+                android:textColor="#5b5b5b"
+                android:textSize="18sp"/>
+      </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
+      <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:gravity="center"
+              android:paddingTop="0dp">
+
+        <Button
+                android:id="@+id/guardarestado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actualizar estado"
                 android:gravity="center"
-                android:paddingTop="0dp">
+                android:textColor="#fff"
+        />
 
-                <Button
-                    android:id="@+id/guardarestado"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Guardar Cambios"
-                    android:gravity="center"
-                    android:textColor="#fff"
-                    ></Button>
+      </LinearLayout>
 
-            </LinearLayout>
+    <LinearLayout
+        android:id="@+id/containerMapa"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:gravity="center"
+        android:visibility="visible">
+
+      <fragment
+          android:id="@+id/map"
+          android:layout_marginStart="25dp"
+          android:layout_marginTop="10dp"
+          android:layout_marginEnd="25dp"
+          android:layout_marginBottom="15dp"
+          android:name="com.google.android.gms.maps.SupportMapFragment"
+          android:layout_width="match_parent"
+          android:layout_height="380dp"
+          tools:context="CambiarmascotaActivity"
+          />
+    </LinearLayout>
+
+    </LinearLayout>
 
 
-        </LinearLayout>
-
-
-    </ScrollView>
-
-
-
-
-
-
-
+  </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
